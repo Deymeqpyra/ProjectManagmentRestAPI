@@ -14,8 +14,6 @@ public class Project
     
     public DateTime LastUpdate { get; private set; }
     
-    private bool IsFinished { get; set; }
-    
     public ProjectStatusId ProjectStatusId { get; }
     public ProjectStatus? ProjectStatus { get;  }
     

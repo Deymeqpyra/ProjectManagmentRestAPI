@@ -12,10 +12,16 @@ public static class ConfigurePersistence
     {
         var dataSourceBuild = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("Default"));
         dataSourceBuild.EnableDynamicJson();
-        
+
         var dataSource = dataSourceBuild.Build();
 
-        services.AddDbContext<ApplicationDbContext>();
-        // TODO: finish the infrastructure services.AddRepositories();
+        services.AddDbContext<ApplicationDbContext>(
+            options=>options
+                .UseNpgsql(dataSource,
+                    builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
+                .UseSnakeCaseNamingConvention()
+                .ConfigureWarnings(w=>w.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)));
+
+        services.AddScoped<ApplicationDbContextInitializer>();
     }
 }

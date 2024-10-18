@@ -1,9 +1,9 @@
 namespace Domain.Categories;
 
-public class CategoryId(Guid value)
+public record CategoryId(Guid Value)
 {
     public static CategoryId New() => new(Guid.NewGuid());
     public static CategoryId Empty() => new (Guid.Empty);
 
-    public override string ToString() => value.ToString();
+    public override string ToString() => Value.ToString();
 }

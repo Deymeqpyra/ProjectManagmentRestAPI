@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\deyme\\.nuget\\packages\\": {}
+    "/home/qpyra/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj",
+      "projectUniqueName": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj",
-      "packagesPath": "C:\\Users\\deyme\\.nuget\\packages\\",
-      "outputPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\obj\\",
+      "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj",
+      "packagesPath": "/home/qpyra/.nuget/packages/",
+      "outputPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\deyme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/qpyra/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -38,11 +38,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -59,12 +54,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.7, 8.0.7]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\deyme\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

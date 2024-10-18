@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Api\\Api.csproj": {}
+    "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Api/Api.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Api\\Api.csproj": {
+    "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Api/Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Api\\Api.csproj",
+        "projectUniqueName": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Api/Api.csproj",
         "projectName": "Api",
-        "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Api\\Api.csproj",
-        "packagesPath": "C:\\Users\\deyme\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Api\\obj\\",
+        "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Api/Api.csproj",
+        "packagesPath": "/home/qpyra/.nuget/packages/",
+        "outputPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\deyme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/qpyra/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -26,14 +26,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj": {
-                "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj"
+              "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Application/Application.csproj": {
+                "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Application/Application.csproj"
               },
-              "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj"
+              "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj": {
+                "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj"
               },
-              "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\Infrastructure.csproj"
+              "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/Infrastructure.csproj": {
+                "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/Infrastructure.csproj"
               }
             }
           }
@@ -42,11 +42,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -60,6 +55,12 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -77,6 +78,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.7, 8.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -85,21 +92,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\deyme\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj": {
+    "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Application/Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj",
+        "projectUniqueName": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Application/Application.csproj",
         "projectName": "Application",
-        "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\deyme\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\obj\\",
+        "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Application/Application.csproj",
+        "packagesPath": "/home/qpyra/.nuget/packages/",
+        "outputPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\deyme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/qpyra/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -117,11 +124,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -156,26 +158,32 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.7, 8.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\deyme\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj": {
+    "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj",
+        "projectUniqueName": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\deyme\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\obj\\",
+        "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj",
+        "packagesPath": "/home/qpyra/.nuget/packages/",
+        "outputPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\deyme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/qpyra/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -193,11 +201,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -214,26 +217,32 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.7, 8.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\deyme\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\Infrastructure.csproj": {
+    "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\deyme\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\obj\\",
+        "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/Infrastructure.csproj",
+        "packagesPath": "/home/qpyra/.nuget/packages/",
+        "outputPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\deyme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/qpyra/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -244,18 +253,17 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj": {
+                "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -270,6 +278,12 @@
               "target": "Package",
               "version": "[8.0.10, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -277,6 +291,10 @@
             "Npgsql": {
               "target": "Package",
               "version": "[8.0.5, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.10, )"
             }
           },
           "imports": [
@@ -290,12 +308,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.7, 8.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\deyme\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

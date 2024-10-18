@@ -1,6 +1,6 @@
 namespace Domain.Roles;
 
-public class RoleId(Guid value)
+public record RoleId(Guid value)
 {
     public static RoleId New() => new (Guid.NewGuid());
     public static RoleId Empty => new (Guid.Empty);

@@ -1,6 +1,6 @@
 namespace Domain.ProjectStatuses;
 
-public class ProjectStatusId(Guid value)
+public record ProjectStatusId(Guid value)
 {
     public static ProjectStatusId New() => new (Guid.NewGuid());
     public static ProjectStatusId Empty() => new (Guid.Empty);

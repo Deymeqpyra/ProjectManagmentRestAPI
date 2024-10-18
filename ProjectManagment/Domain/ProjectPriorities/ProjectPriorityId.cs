@@ -1,6 +1,6 @@
 namespace Domain.ProjectPriorities;
 
-public class ProjectPriorityId(Guid value)
+public record ProjectPriorityId(Guid value)
 {
     public ProjectPriorityId New() => new(Guid.NewGuid());
     public ProjectPriorityId Empty() => new(Guid.Empty);

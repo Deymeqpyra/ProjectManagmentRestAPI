@@ -1,4 +1,5 @@
 using Domain.Roles;
+using Domain.Tasks;
 
 namespace Domain.Users;
 
@@ -11,4 +12,7 @@ public class User
     
     public RoleId RoleId { get;  }
     public Role? Role { get; }
+    
+    public ProjectTaskId? ProjectTaskId { get; }
+    public ProjectTask? ProjectTask { get; }
 }
