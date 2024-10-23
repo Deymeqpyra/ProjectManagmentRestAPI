@@ -1,4 +1,4 @@
-namespace Domain.ProjectPriorities;
+namespace Domain.Priorities;
 
 public class ProjectPriority
 {

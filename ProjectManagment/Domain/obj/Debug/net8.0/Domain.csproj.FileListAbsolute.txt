@@ -10,3 +10,15 @@
 /home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/obj/Debug/net8.0/refint/Domain.dll
 /home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/obj/Debug/net8.0/Domain.pdb
 /home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/obj/Debug/net8.0/ref/Domain.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\bin\Debug\net8.0\Domain.deps.json
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\bin\Debug\net8.0\Domain.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\bin\Debug\net8.0\Domain.pdb
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\Domain.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\refint\Domain.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\Domain.pdb
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Domain\obj\Debug\net8.0\ref\Domain.dll

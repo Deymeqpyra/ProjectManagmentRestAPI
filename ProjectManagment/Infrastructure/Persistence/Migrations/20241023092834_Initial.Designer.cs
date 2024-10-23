@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241018201232_Initial")]
+    [Migration("20241023092834_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -43,7 +43,7 @@ namespace Infrastructure.Persistence.Migrations
                     b.ToTable("categories", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.ProjectPriorities.ProjectPriority", b =>
+            modelBuilder.Entity("Domain.Priorities.ProjectPriority", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
@@ -60,21 +60,31 @@ namespace Infrastructure.Persistence.Migrations
                     b.ToTable("project_priorities", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.ProjectStatuses.ProjectStatus", b =>
+            modelBuilder.Entity("Domain.ProjectUsers.ProjectUser", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("ProjectUserId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnName("project_user_id");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("name");
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("project_id");
 
-                    b.HasKey("Id")
-                        .HasName("pk_project_statuses");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
 
-                    b.ToTable("project_statuses", (string)null);
+                    b.HasKey("ProjectUserId")
+                        .HasName("pk_project_users");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_project_users_project_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_project_users_user_id");
+
+                    b.ToTable("project_users", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Projects.Project", b =>
@@ -141,6 +151,23 @@ namespace Infrastructure.Persistence.Migrations
                     b.ToTable("roles", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Statuses.ProjectStatus", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_project_statuses");
+
+                    b.ToTable("project_statuses", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Tags.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -199,6 +226,10 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_finished");
 
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("project_id");
+
                     b.Property<string>("ShortDescription")
                         .IsRequired()
                         .HasColumnType("text")
@@ -254,16 +285,37 @@ namespace Infrastructure.Persistence.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.ProjectUsers.ProjectUser", b =>
+                {
+                    b.HasOne("Domain.Projects.Project", "Project")
+                        .WithMany("ProjectUsers")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectuser_project");
+
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithMany("ProjectUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectuser_user");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Projects.Project", b =>
                 {
-                    b.HasOne("Domain.ProjectPriorities.ProjectPriority", "ProjectPriority")
+                    b.HasOne("Domain.Priorities.ProjectPriority", "ProjectPriority")
                         .WithMany()
                         .HasForeignKey("ProjectPriorityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_project_priority_id");
 
-                    b.HasOne("Domain.ProjectStatuses.ProjectStatus", "ProjectStatus")
+                    b.HasOne("Domain.Statuses.ProjectStatus", "ProjectStatus")
                         .WithMany()
                         .HasForeignKey("ProjectStatusId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -330,12 +382,19 @@ namespace Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Domain.Projects.Project", b =>
                 {
+                    b.Navigation("ProjectUsers");
+
                     b.Navigation("TagsProjects");
                 });
 
             modelBuilder.Entity("Domain.Tags.Tag", b =>
                 {
                     b.Navigation("TagsProjects");
+                });
+
+            modelBuilder.Entity("Domain.Users.User", b =>
+                {
+                    b.Navigation("ProjectUsers");
                 });
 #pragma warning restore 612, 618
         }

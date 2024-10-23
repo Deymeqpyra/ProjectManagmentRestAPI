@@ -1,4 +1,4 @@
-using Domain.ProjectStatuses;
+using Domain.Statuses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

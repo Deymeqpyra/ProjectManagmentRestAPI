@@ -1,4 +1,4 @@
-using Domain.ProjectPriorities;
+using Domain.Priorities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

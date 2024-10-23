@@ -1,5 +1,6 @@
-using Domain.ProjectPriorities;
-using Domain.ProjectStatuses;
+using Domain.Priorities;
+using Domain.ProjectUsers;
+using Domain.Statuses;
 using Domain.Tags;
 using Domain.TagsProjects;
 
@@ -21,6 +22,6 @@ public class Project
     public ProjectPriority? ProjectPriority { get;  }
 
     public ICollection<TagsProject> TagsProjects { get; } = [];
-    
+    public ICollection<ProjectUser> ProjectUsers { get; } = [];
     public List<string> Comments { get; private set; } 
 }

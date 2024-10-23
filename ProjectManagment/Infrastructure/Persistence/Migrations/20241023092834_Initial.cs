@@ -80,6 +80,7 @@ namespace Infrastructure.Persistence.Migrations
                     title = table.Column<string>(type: "text", nullable: false),
                     short_description = table.Column<string>(type: "text", nullable: false),
                     is_finished = table.Column<bool>(type: "boolean", nullable: false),
+                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -174,10 +175,45 @@ namespace Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "project_users",
+                columns: table => new
+                {
+                    project_user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_project_users", x => x.project_user_id);
+                    table.ForeignKey(
+                        name: "fk_projectuser_project",
+                        column: x => x.project_id,
+                        principalTable: "projects",
+                        principalColumn: "project_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_projectuser_user",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "ix_project_tasks_category_id",
                 table: "project_tasks",
                 column: "category_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_project_users_project_id",
+                table: "project_users",
+                column: "project_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_project_users_user_id",
+                table: "project_users",
+                column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_projects_project_priority_id",
@@ -213,6 +249,9 @@ namespace Infrastructure.Persistence.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "project_users");
+
             migrationBuilder.DropTable(
                 name: "tags_projects");
 

@@ -1,4 +1,4 @@
-namespace Domain.ProjectStatuses;
+namespace Domain.Statuses;
 
 public record ProjectStatusId(Guid value)
 {

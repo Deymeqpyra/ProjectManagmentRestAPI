@@ -1,4 +1,5 @@
 using Domain.Categories;
+using Domain.Projects;
 using Domain.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,9 +13,9 @@ public class ProjectTaskConfiguration : IEntityTypeConfiguration<ProjectTask>
         builder.HasKey(x => x.ProjectTaskId);
         builder.Property(x => x.ProjectTaskId)
             .HasConversion(x => x.value, x => new ProjectTaskId(x));
-        
-        
-        
+
+        builder.Property(x => x.ProjectId)
+            .HasConversion(x => x.value, x => new ProjectId(x));
         
         builder.Property(x => x.CategoryId)
             .HasConversion(x => x.Value, x => new CategoryId(x));

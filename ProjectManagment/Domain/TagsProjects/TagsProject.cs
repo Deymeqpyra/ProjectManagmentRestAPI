@@ -9,7 +9,7 @@ public class TagsProject
     
     public ProjectId ProjectId { get; private set; }
     public Project? Project { get; }
-    
+        
     public TagId TagId { get; private set; }
     public Tag? Tag { get; }
 }

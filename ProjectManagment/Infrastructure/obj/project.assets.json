@@ -2205,19 +2205,19 @@
     ]
   },
   "packageFolders": {
-    "/home/qpyra/.nuget/packages/": {}
+    "C:\\Users\\deyme\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/Infrastructure.csproj",
+      "projectUniqueName": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/Infrastructure.csproj",
-      "packagesPath": "/home/qpyra/.nuget/packages/",
-      "outputPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Infrastructure/obj/",
+      "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\deyme\\.nuget\\packages\\",
+      "outputPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/qpyra/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\deyme\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2229,8 +2229,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj": {
-              "projectPath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj"
+            "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj": {
+              "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj"
             }
           }
         }
@@ -2239,6 +2239,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2283,18 +2288,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.7, 8.0.7]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

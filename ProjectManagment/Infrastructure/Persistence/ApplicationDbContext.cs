@@ -1,9 +1,10 @@
 using System.Reflection;
 using Domain.Categories;
-using Domain.ProjectPriorities;
+using Domain.Priorities;
 using Domain.Projects;
-using Domain.ProjectStatuses;
+using Domain.ProjectUsers;
 using Domain.Roles;
+using Domain.Statuses;
 using Domain.Tags;
 using Domain.TagsProjects;
 using Domain.Tasks;
@@ -24,7 +25,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<ProjectStatus> ProjectStatuses { get; set; }
     public DbSet<ProjectTask> ProjectTasks { get; set; }
     public DbSet<Project> Projects { get; set; }
-
+    public DbSet<ProjectUser> ProjectUsers { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -1,7 +1,7 @@
 using System.ComponentModel;
-using Domain.ProjectPriorities;
+using Domain.Priorities;
 using Domain.Projects;
-using Domain.ProjectStatuses;
+using Domain.Statuses;
 using Infrastructure.Persistence.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -33,6 +33,7 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
             .HasForeignKey(x => x.ProjectStatusId)
             .HasConstraintName("fk_project_status_id")
             .OnDelete(DeleteBehavior.Restrict);
+        
         builder.HasOne(x => x.ProjectPriority)
             .WithMany()
             .HasForeignKey(x => x.ProjectPriorityId)

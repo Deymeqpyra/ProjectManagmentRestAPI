@@ -1,3 +1,4 @@
+using Domain.ProjectUsers;
 using Domain.Roles;
 using Domain.Tasks;
 
@@ -12,6 +13,8 @@ public class User
     
     public RoleId RoleId { get;  }
     public Role? Role { get; }
+
+    public ICollection<ProjectUser> ProjectUsers { get; } = [];
     
     public ProjectTaskId? ProjectTaskId { get; }
     public ProjectTask? ProjectTask { get; }
