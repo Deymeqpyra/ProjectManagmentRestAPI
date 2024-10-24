@@ -116,7 +116,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -149,6 +153,10 @@
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[8.0.1, )"
+            },
+            "Optional": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             }
           },
           "imports": [
@@ -251,6 +259,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj": {
+                "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj"
+              },
               "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj": {
                 "projectPath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj"
               }
@@ -297,6 +308,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.10, )"
+            },
+            "Optional": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             }
           },
           "imports": [
