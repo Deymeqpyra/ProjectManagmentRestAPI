@@ -24,3 +24,6 @@ E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Application\obj\Debug\net8.
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Application\obj\Debug\net8.0\refint\Application.dll
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Application\obj\Debug\net8.0\Application.pdb
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Application\obj\Debug\net8.0\ref\Application.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Application\bin\Debug\net8.0\Domain.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Application\bin\Debug\net8.0\Domain.pdb
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Application\obj\Debug\net8.0\Applicat.44B5EDA2.Up2Date

@@ -246,3 +246,4 @@ E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\refint
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\Api.pdb
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\Api.genruntimeconfig.cache
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\ref\Api.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Optional.dll

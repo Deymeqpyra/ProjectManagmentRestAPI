@@ -34,3 +34,5 @@ E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Infrastructure\obj\Debug\ne
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Infrastructure\obj\Debug\net8.0\Infrastructure.pdb
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Infrastructure\obj\Debug\net8.0\Infrastructure.genruntimeconfig.cache
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Infrastructure\obj\Debug\net8.0\ref\Infrastructure.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Infrastructure\bin\Debug\net8.0\Application.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Infrastructure\bin\Debug\net8.0\Application.pdb
