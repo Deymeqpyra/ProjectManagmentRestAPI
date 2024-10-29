@@ -17,6 +17,15 @@ public class CategoryRepository(ApplicationDbContext context) : ICategoryReposit
         return category == null ? Option.None<Category>() : Option.Some(category);
     }
 
+    public async Task<Option<Category>> GetByName(string Name, CancellationToken cancellationToken)
+    {
+        var entity = await context.Categories
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Name == Name);
+        
+        return entity == null ? Option.None<Category>() : Option.Some(entity);
+    }
+
     public async Task<IReadOnlyList<Category>> GetAll(CancellationToken cancellationToken)
     {
         return await context.Categories
