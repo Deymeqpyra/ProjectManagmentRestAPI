@@ -16,4 +16,9 @@ public class Category
     
     public static Category New(CategoryId categoryId, string categoryName)
     => new(categoryId, categoryName);
+
+    public void UpdateDetails(string categoryName)
+    {
+        Name = categoryName;
+    }
 }
