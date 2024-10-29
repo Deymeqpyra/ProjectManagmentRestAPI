@@ -2,20 +2,20 @@ namespace Domain.Categories;
 
 public class Category
 {
-    public CategoryId Id { get;  }
-    
+    public CategoryId Id { get; }
+
     public string Name { get; private set; }
 
     private Category(
-        CategoryId id, 
+        CategoryId id,
         string name)
     {
         Id = id;
         Name = name;
     }
-    
+
     public static Category New(CategoryId categoryId, string categoryName)
-    => new(categoryId, categoryName);
+        => new(categoryId, categoryName);
 
     public void UpdateDetails(string categoryName)
     {

@@ -17,6 +17,14 @@ public class TagRepository(ApplicationDbContext context) : ITagRepository, ITagQ
         return entity == null ? Option.None<Tag>() : Option.Some(entity); 
     }
 
+    public async Task<Option<Tag>> GetByName(string name, CancellationToken cancellationToken)
+    {
+        var entity = await context.Tags
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Name == name);
+        
+        return entity == null ? Option.None<Tag>() : Option.Some(entity);
+    }
     public async Task<IReadOnlyList<Tag>> GetAll(CancellationToken cancellationToken)
     {
         return await context.Tags

@@ -30,7 +30,7 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
         return entity.Match<ActionResult<CategoryDto>>(
             c => CategoryDto.FromDomainModel(c),
             () => NotFound());
-    }
+    }   
 
     [HttpPost("CreateCategory")]
     public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] string categoryName,

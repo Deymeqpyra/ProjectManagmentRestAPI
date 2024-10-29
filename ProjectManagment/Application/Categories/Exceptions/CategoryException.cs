@@ -9,8 +9,8 @@ public abstract class CategoryException(CategoryId categoryId, string message, E
 }
 
 public class CategoryNotFoundException(CategoryId categoryId) 
-    : CategoryException(categoryId, "Category not found");
+    : CategoryException(categoryId, $"Category with {categoryId} not found");
 public class CategoryAlreadyExistsException(CategoryId categoryId)
-    : CategoryException(categoryId, "Category already exists");
+    : CategoryException(categoryId, $"Category with id: {categoryId} already exists");
 public class CategoryUnknownException(CategoryId categoryId, Exception innerException) 
-    : CategoryException(categoryId, $"Unknown exception for category: {categoryId}"); 
+    : CategoryException(categoryId, $"Unknown exception for category: {categoryId}", innerException); 
