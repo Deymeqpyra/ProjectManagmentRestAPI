@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "irqZAm0h1X4=",
+  "dgSpecHash": "b+H7GEaF1yY=",
   "success": true,
-  "projectFilePath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain\\Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Domain/Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/qpyra/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.7/microsoft.aspnetcore.app.ref.8.0.7.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -2,8 +2,8 @@ namespace Domain.Priorities;
 
 public record ProjectPriorityId(Guid value)
 {
-    public ProjectPriorityId New() => new(Guid.NewGuid());
-    public ProjectPriorityId Empty() => new(Guid.Empty);
+    public static ProjectPriorityId New() => new(Guid.NewGuid());
+    public static ProjectPriorityId Empty() => new(Guid.Empty);
 
     public override string ToString() => value.ToString();
 }

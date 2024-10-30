@@ -18,6 +18,14 @@ public class PriorityRepository(ApplicationDbContext context) : IPriorityReposit
 
         return entity == null ? Option.None<ProjectPriority>() : Option.Some(entity);
     }
+    public async Task<Option<ProjectPriority>> GetByName(string Name, CancellationToken cancellationToken)
+    {
+        var entity = await context.ProjectPriorities
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x=>x.Name == Name, cancellationToken);
+
+        return entity == null ? Option.None<ProjectPriority>() : Option.Some(entity);
+    }
 
     public async Task<IReadOnlyList<ProjectPriority>> GetAll(CancellationToken cancellationToken)
     {
