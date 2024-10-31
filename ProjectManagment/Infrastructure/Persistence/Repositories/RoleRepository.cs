@@ -14,6 +14,14 @@ public class RoleRepository(ApplicationDbContext context) : IRoleRepository, IRo
             .AsNoTracking()
             .ToListAsync();
     }
+    public async Task<Option<Role>> GetByName(string name, CancellationToken cancellationToken)
+    {
+        var entity = await context.Roles
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Name == name, cancellationToken);
+        
+        return entity == null ? Option.None<Role>() : Option.Some(entity);
+    }
 
     public async Task<Option<Role>> GetById(RoleId id, CancellationToken cancellationToken)
     {

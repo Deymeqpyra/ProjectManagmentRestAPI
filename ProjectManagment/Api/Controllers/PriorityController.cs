@@ -19,10 +19,11 @@ public class PriorityController(ISender sender, IPriorityQueries priorityQueries
 
         return entities.Select(PriorityDto.FromDomainModel).ToList();
     }
-    [HttpGet("GetById/{priorityId:guid}")]
-    public async Task<ActionResult<PriorityDto>> GetById([FromRoute] Guid priorityId, CancellationToken cancellationToken)
-    {
 
+    [HttpGet("GetById/{priorityId:guid}")]
+    public async Task<ActionResult<PriorityDto>> GetById([FromRoute] Guid priorityId,
+        CancellationToken cancellationToken)
+    {
         var entity = await priorityQueries.GetById(new ProjectPriorityId(priorityId), cancellationToken);
 
         return entity.Match<ActionResult<PriorityDto>>(
@@ -30,6 +31,7 @@ public class PriorityController(ISender sender, IPriorityQueries priorityQueries
             () => NotFound()
         );
     }
+
     [HttpPost("CreatePriority")]
     public async Task<ActionResult<PriorityDto>> Create([FromBody] string Name, CancellationToken cancellationToken)
     {
@@ -66,7 +68,8 @@ public class PriorityController(ISender sender, IPriorityQueries priorityQueries
     }
 
     [HttpDelete("DeletePriority/{priorityId:guid}")]
-    public async Task<ActionResult<PriorityDto>> Delete([FromRoute] Guid priorityId, CancellationToken cancellationToken)
+    public async Task<ActionResult<PriorityDto>> Delete([FromRoute] Guid priorityId,
+        CancellationToken cancellationToken)
     {
         var input = new DeletePriorityCommand
         {

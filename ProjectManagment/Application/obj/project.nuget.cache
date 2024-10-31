@@ -1,17 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "umTeiiEGxcU=",
+  "dgSpecHash": "guhlUyvYdDA=",
   "success": true,
-  "projectFilePath": "/home/qpyra/RestAPI/ProjectManagmentRestAPI/ProjectManagment/Application/Application.csproj",
+  "projectFilePath": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application\\Application.csproj",
   "expectedPackageFiles": [
-    "/home/qpyra/.nuget/packages/fluentvalidation/11.10.0/fluentvalidation.11.10.0.nupkg.sha512",
-    "/home/qpyra/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.10.0/fluentvalidation.dependencyinjectionextensions.11.10.0.nupkg.sha512",
-    "/home/qpyra/.nuget/packages/mediatr/12.4.1/mediatr.12.4.1.nupkg.sha512",
-    "/home/qpyra/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
-    "/home/qpyra/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.1/microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
-    "/home/qpyra/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
-    "/home/qpyra/.nuget/packages/optional/4.0.0/optional.4.0.0.nupkg.sha512",
-    "/home/qpyra/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.7/microsoft.aspnetcore.app.ref.8.0.7.nupkg.sha512"
+    "C:\\Users\\deyme\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
+    "C:\\Users\\deyme\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.10.0\\fluentvalidation.dependencyinjectionextensions.11.10.0.nupkg.sha512",
+    "C:\\Users\\deyme\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
+    "C:\\Users\\deyme\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\deyme\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.1\\microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
+    "C:\\Users\\deyme\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\deyme\\.nuget\\packages\\optional\\4.0.0\\optional.4.0.0.nupkg.sha512"
   ],
   "logs": []
 }
