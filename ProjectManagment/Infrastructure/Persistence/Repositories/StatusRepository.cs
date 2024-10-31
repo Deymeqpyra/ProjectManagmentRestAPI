@@ -23,6 +23,14 @@ public class StatusRepository(ApplicationDbContext context) : IStatusRepository,
 
         return entity == null ? Option.None<ProjectStatus>() : Option.Some(entity);
     }
+    public async Task<Option<ProjectStatus>> GetByName(string name, CancellationToken cancellationToken)
+    {
+        var entity = await context.ProjectStatuses
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Name == name);
+
+        return entity == null ? Option.None<ProjectStatus>() : Option.Some(entity);
+    }
 
     public async Task<ProjectStatus> Create(ProjectStatus projectStatus, CancellationToken cancellationToken)
     {
