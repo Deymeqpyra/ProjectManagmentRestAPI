@@ -1,7 +1,7 @@
 using Domain.Tags;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace Api.Dtos;
+namespace Api.Dtos.TagDto;
 
 public record TagDto(
     Guid? tagId,

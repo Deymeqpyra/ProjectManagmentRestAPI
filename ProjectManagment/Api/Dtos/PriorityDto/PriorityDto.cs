@@ -1,6 +1,6 @@
 using Domain.Priorities;
 
-namespace Api.Dtos;
+namespace Api.Dtos.PriorityDto;
 
 public record PriorityDto(
     Guid? PriorityId,

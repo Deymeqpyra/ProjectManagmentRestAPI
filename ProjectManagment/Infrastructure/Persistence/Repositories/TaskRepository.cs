@@ -23,6 +23,14 @@ public class TaskRepository(ApplicationDbContext context) : ITaskRepository, ITa
 
         return entity == null ? Option.None<ProjectTask>() : Option.Some(entity);
     }
+    public async Task<Option<ProjectTask>> GetByTitle(string title, CancellationToken cancellationToken)
+    {
+        var entity = await context.ProjectTasks
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Title == title, cancellationToken);
+
+        return entity == null ? Option.None<ProjectTask>() : Option.Some(entity);
+    }
 
     public async Task<ProjectTask> Create(ProjectTask projectTask, CancellationToken cancellationToken)
     {

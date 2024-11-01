@@ -1,6 +1,6 @@
 using Domain.Statuses;
 
-namespace Api.Dtos;
+namespace Api.Dtos.StatusDto;
 
 public record StatusDto(
     Guid? StatusId,

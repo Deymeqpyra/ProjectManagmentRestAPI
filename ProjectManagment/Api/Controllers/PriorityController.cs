@@ -1,4 +1,4 @@
-using Api.Dtos;
+using Api.Dtos.PriorityDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Priorities.Commands;
