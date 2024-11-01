@@ -35,7 +35,7 @@ public class DeleteTaskCommandHandler(ITaskRepository repository)
         }
         catch (Exception e)
         {
-            return new TaskUnknowException(task.ProjectTaskId, e);
+            return new TaskUnknowException(task.TaskId, e);
         }
     }
 }

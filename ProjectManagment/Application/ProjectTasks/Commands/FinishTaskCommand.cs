@@ -23,7 +23,7 @@ public class FinishTaskCommandHandler(ITaskRepository repository)
             {
                 if (t.IsFinished == true)
                 {
-                    return new TaskAlreadyFinished(t.ProjectTaskId);
+                    return new TaskAlreadyFinished(t.TaskId);
                 }
                 return await FinishTaskEntity(t, cancellationToken);
             },
@@ -42,7 +42,7 @@ public class FinishTaskCommandHandler(ITaskRepository repository)
         }
         catch (Exception e)
         {
-            return new TaskUnknowException(projectTask.ProjectTaskId, e);
+            return new TaskUnknowException(projectTask.TaskId, e);
         }
     }
 }

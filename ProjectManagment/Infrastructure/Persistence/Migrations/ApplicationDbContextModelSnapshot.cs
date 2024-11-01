@@ -211,9 +211,9 @@ namespace Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Domain.Tasks.ProjectTask", b =>
                 {
-                    b.Property<Guid>("ProjectTaskId")
+                    b.Property<Guid>("TaskId")
                         .HasColumnType("uuid")
-                        .HasColumnName("project_task_id");
+                        .HasColumnName("task_id");
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid")
@@ -237,11 +237,14 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.HasKey("ProjectTaskId")
+                    b.HasKey("TaskId")
                         .HasName("pk_project_tasks");
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_project_tasks_category_id");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_project_tasks_project_id");
 
                     b.ToTable("project_tasks", (string)null);
                 });
@@ -354,7 +357,16 @@ namespace Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_project_task_category_id");
 
+                    b.HasOne("Domain.Projects.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_project_task_project_id");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>

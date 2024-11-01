@@ -19,7 +19,7 @@ public class TaskRepository(ApplicationDbContext context) : ITaskRepository, ITa
     {
         var entity = await context.ProjectTasks
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.ProjectTaskId == id, cancellationToken);
+            .FirstOrDefaultAsync(x => x.TaskId == id, cancellationToken);
 
         return entity == null ? Option.None<ProjectTask>() : Option.Some(entity);
     }

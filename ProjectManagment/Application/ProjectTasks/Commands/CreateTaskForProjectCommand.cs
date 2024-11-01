@@ -25,7 +25,7 @@ public class CreateTaskForProjectCommandHandler(ITaskRepository repository) :
         bool isFinishedTask = false;
         var existingTask = await repository.GetByTitle(request.TaskTitle, cancellationToken);
         return await existingTask.Match(
-            t => Task.FromResult<Result<ProjectTask, TaskException>>(new TaskAlreadyExistsException(t.ProjectTaskId)),
+            t => Task.FromResult<Result<ProjectTask, TaskException>>(new TaskAlreadyExistsException(t.TaskId)),
             async () => await CreateEntity(
                 request.TaskTitle,
                 request.ShortDescription,
@@ -45,7 +45,7 @@ public class CreateTaskForProjectCommandHandler(ITaskRepository repository) :
     {
         try
         {
-            var entity = ProjectTask.New(taskTitle, shortDescription, isFinished, projectId, categoryId);
+            var entity = ProjectTask.New(ProjectTaskId.New(),taskTitle, shortDescription, isFinished, projectId, categoryId);
 
             return await repository.Create(entity, cancellationToken);
         }

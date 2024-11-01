@@ -42,7 +42,7 @@ public class UpdateTaskCommandHandler(ITaskRepository repository) : IRequestHand
         }
         catch (Exception e)
         {
-            return new TaskUnknowException(task.ProjectTaskId, e);
+            return new TaskUnknowException(task.TaskId, e);
         }
     }
 }

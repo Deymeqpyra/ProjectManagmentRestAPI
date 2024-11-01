@@ -73,28 +73,6 @@ namespace Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "project_tasks",
-                columns: table => new
-                {
-                    project_task_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    title = table.Column<string>(type: "text", nullable: false),
-                    short_description = table.Column<string>(type: "text", nullable: false),
-                    is_finished = table.Column<bool>(type: "boolean", nullable: false),
-                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    category_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_project_tasks", x => x.project_task_id);
-                    table.ForeignKey(
-                        name: "fk_project_task_category_id",
-                        column: x => x.category_id,
-                        principalTable: "categories",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "projects",
                 columns: table => new
                 {
@@ -124,29 +102,30 @@ namespace Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "users",
+                name: "project_tasks",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    email = table.Column<string>(type: "varchar(255)", nullable: false),
-                    role_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    project_task_id = table.Column<Guid>(type: "uuid", nullable: true)
+                    task_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    title = table.Column<string>(type: "text", nullable: false),
+                    short_description = table.Column<string>(type: "text", nullable: false),
+                    is_finished = table.Column<bool>(type: "boolean", nullable: false),
+                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    category_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_users", x => x.id);
+                    table.PrimaryKey("pk_project_tasks", x => x.task_id);
                     table.ForeignKey(
-                        name: "fk_user_project_task_id",
-                        column: x => x.project_task_id,
-                        principalTable: "project_tasks",
-                        principalColumn: "project_task_id",
+                        name: "fk_project_task_category_id",
+                        column: x => x.category_id,
+                        principalTable: "categories",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "fk_user_role_id",
-                        column: x => x.role_id,
-                        principalTable: "roles",
-                        principalColumn: "id",
+                        name: "fk_project_task_project_id",
+                        column: x => x.project_id,
+                        principalTable: "projects",
+                        principalColumn: "project_id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -171,6 +150,33 @@ namespace Infrastructure.Persistence.Migrations
                         name: "fk_tagprojects_tag_id",
                         column: x => x.tag_id,
                         principalTable: "tags",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    email = table.Column<string>(type: "varchar(255)", nullable: false),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    project_task_id = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_users", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_user_project_task_id",
+                        column: x => x.project_task_id,
+                        principalTable: "project_tasks",
+                        principalColumn: "task_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_user_role_id",
+                        column: x => x.role_id,
+                        principalTable: "roles",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -204,6 +210,11 @@ namespace Infrastructure.Persistence.Migrations
                 name: "ix_project_tasks_category_id",
                 table: "project_tasks",
                 column: "category_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_project_tasks_project_id",
+                table: "project_tasks",
+                column: "project_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_project_users_project_id",
@@ -259,9 +270,6 @@ namespace Infrastructure.Persistence.Migrations
                 name: "users");
 
             migrationBuilder.DropTable(
-                name: "projects");
-
-            migrationBuilder.DropTable(
                 name: "tags");
 
             migrationBuilder.DropTable(
@@ -271,13 +279,16 @@ namespace Infrastructure.Persistence.Migrations
                 name: "roles");
 
             migrationBuilder.DropTable(
+                name: "categories");
+
+            migrationBuilder.DropTable(
+                name: "projects");
+
+            migrationBuilder.DropTable(
                 name: "project_priorities");
 
             migrationBuilder.DropTable(
                 name: "project_statuses");
-
-            migrationBuilder.DropTable(
-                name: "categories");
         }
     }
 }
