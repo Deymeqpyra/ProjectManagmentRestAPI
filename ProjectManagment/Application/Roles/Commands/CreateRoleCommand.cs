@@ -36,7 +36,7 @@ public class CreateRoleCommandHandler(IRoleRepository repository)
         }
         catch (Exception e)
         {
-            return new RoleUnknownException(RoleId.Empty, e);
+            return new RoleUnknownException(RoleId.Empty(), e);
         }
     }
 }

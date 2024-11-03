@@ -12,9 +12,19 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
     {
         return await context.Users
             .AsNoTracking()
+            .Include(u => u.Role)
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<Option<User>> GetByIdWithRoles(UserId id, CancellationToken cancellationToken)
+    {
+        var entity = await context.Users
+            .AsNoTracking()
+            .Include(u => u.Role)
+            .FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);
+        
+        return entity == null ? Option.None<User>() : Option.Some(entity);
+    }
     public async Task<Option<User>> GetById(UserId id, CancellationToken cancellationToken)
     {
         var entity = await context.Users
@@ -23,12 +33,11 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
         
         return entity == null ? Option.None<User>() : Option.Some(entity);
     }
-    public async Task<Option<User>> GetByName(string name, CancellationToken cancellationToken)
+    public async Task<Option<User>> GetByEmail(string email, CancellationToken cancellationToken)
     {
         var entity = await context.Users
             .AsNoTracking()
-            .Include(x=>x.Role)
-            .FirstOrDefaultAsync(x=>x.UserName == name, cancellationToken);
+            .FirstOrDefaultAsync(x=>x.Email == email, cancellationToken);
         
         return entity == null ? Option.None<User>() : Option.Some(entity);
     }

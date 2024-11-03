@@ -31,6 +31,18 @@ public class User
     public static User RegisterNewUser(UserId id, string userName, string password, string email, RoleId roleId)
     => new(id, userName, password, email, roleId);
 
+    public void UpdatePassword(string password)
+    {
+        Password = password;
+    } 
+    public void UpdateEmail(string email)
+    {
+        Email = email;
+    } 
+    public void UpdateUserName(string userName)
+    {
+        UserName = userName;
+    }
     public void SetNewRole(RoleId roleId)
     {
         RoleId = roleId;

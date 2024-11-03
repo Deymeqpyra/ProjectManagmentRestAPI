@@ -5,7 +5,7 @@ namespace Application.Common.Interfaces.Repositories;
 
 public interface IUserRepository
 {
-    Task<Option<User>> GetByName(string name, CancellationToken cancellationToken);
+    Task<Option<User>> GetByEmail(string email, CancellationToken cancellationToken);
     Task<Option<User>> GetById(UserId id, CancellationToken cancellationToken);
     Task<User> Create(User user, CancellationToken cancellationToken);
     Task<User> Update(User user, CancellationToken cancellationToken);

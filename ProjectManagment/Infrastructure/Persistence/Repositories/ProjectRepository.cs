@@ -12,17 +12,25 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
     {
         return await context.Projects
             .AsNoTracking()
-            .Include(x=>x.ProjectStatus)
-            .Include(x=>x.ProjectPriority)
+            .Include(x => x.ProjectPriority)
+            .Include(x => x.ProjectStatus)
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<Option<Project>> GetByIdWithStatusAndPriority(ProjectId id, CancellationToken cancellationToken)
+    {
+        var entity = await context.Projects
+            .AsNoTracking()
+            .Include(x => x.ProjectPriority)
+            .Include(x => x.ProjectStatus)
+            .FirstOrDefaultAsync(x=>x.ProjectId == id, cancellationToken);
+        
+        return entity == null ? Option.None<Project>() : Option.Some(entity);
+    }
     public async Task<Option<Project>> GetById(ProjectId id, CancellationToken cancellationToken)
     {
         var entity = await context.Projects
             .AsNoTracking()
-            .Include(x=>x.ProjectStatus)
-            .Include(x=>x.ProjectPriority)
             .FirstOrDefaultAsync(x=>x.ProjectId == id, cancellationToken);
         
         return entity == null ? Option.None<Project>() : Option.Some(entity);
