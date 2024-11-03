@@ -1,6 +1,7 @@
+using Api.Dtos.PrioritiesDto;
+using Api.Dtos.StatusesDto;
 using Domain.Priorities;
 using Domain.Projects;
-using Domain.Statuses;
 
 namespace Api.Dtos.ProjectDto;
 
@@ -9,7 +10,10 @@ public record ProjectDto(
     string Title,
     string Description,
     Guid StatusId,
+    StatusDto? Status,
     Guid PriorityId,
+    PriorityDto? Priority,
+
     List<string> Comments)
 {
     public static ProjectDto FromProject(Project project)
@@ -17,7 +21,9 @@ public record ProjectDto(
         Title: project.Title,
         Description: project.Description,
         StatusId: project.ProjectStatusId.value,
+        Status: project.ProjectStatus == null ? null : StatusDto.FromDomainModel(project.ProjectStatus),
         PriorityId: project.ProjectPriorityId.value,
-        Comments: project.Comments
+        Comments: project.Comments,
+        Priority: project.ProjectPriority == null ? null : PriorityDto.FromDomainModel(project.ProjectPriority)
         );
 }

@@ -12,6 +12,8 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
     {
         return await context.Projects
             .AsNoTracking()
+            .Include(x=>x.ProjectStatus)
+            .Include(x=>x.ProjectPriority)
             .ToListAsync(cancellationToken);
     }
 
@@ -19,6 +21,8 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
     {
         var entity = await context.Projects
             .AsNoTracking()
+            .Include(x=>x.ProjectStatus)
+            .Include(x=>x.ProjectPriority)
             .FirstOrDefaultAsync(x=>x.ProjectId == id, cancellationToken);
         
         return entity == null ? Option.None<Project>() : Option.Some(entity);

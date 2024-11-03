@@ -1,4 +1,4 @@
-using Api.Dtos.RoleDto;
+using Api.Dtos.RolesDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Roles.Commands;

@@ -1,6 +1,6 @@
 using Domain.Categories;
 
-namespace Api.Dtos.CategoryDto;
+namespace Api.Dtos.CategoriesDto;
 
 public record CategoryDto(
     Guid? CategoryId,

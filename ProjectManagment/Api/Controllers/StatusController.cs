@@ -1,4 +1,4 @@
-using Api.Dtos.StatusDto;
+using Api.Dtos.StatusesDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Statuses.Commands;

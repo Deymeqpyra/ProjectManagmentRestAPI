@@ -1,4 +1,4 @@
-using Api.Dtos.TagDto;
+using Api.Dtos.TagsDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Tags.Commands;

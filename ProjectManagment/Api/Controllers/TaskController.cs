@@ -1,4 +1,4 @@
-using Api.Dtos.TaskDto;
+using Api.Dtos.TasksDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.ProjectTasks.Commands;

@@ -1,6 +1,6 @@
 using Domain.Tasks;
 
-namespace Api.Dtos.TaskDto;
+namespace Api.Dtos.TasksDto;
 
 public record CreateTaskDto(
     string title,

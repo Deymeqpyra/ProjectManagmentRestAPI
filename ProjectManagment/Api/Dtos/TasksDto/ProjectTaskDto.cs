@@ -1,7 +1,7 @@
 using Api.Dtos.CategoriesDto;
 using Domain.Tasks;
 
-namespace Api.Dtos.TaskDto;
+namespace Api.Dtos.TasksDto;
 
 public record ProjectTaskDto(
     Guid? TaskId,
