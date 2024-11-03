@@ -260,10 +260,10 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("email");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("varchar(255)")
-                        .HasColumnName("name");
+                        .HasColumnName("password");
 
                     b.Property<Guid?>("ProjectTaskId")
                         .HasColumnType("uuid")
@@ -272,6 +272,11 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uuid")
                         .HasColumnName("role_id");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("user_name");
 
                     b.HasKey("Id")
                         .HasName("pk_users");

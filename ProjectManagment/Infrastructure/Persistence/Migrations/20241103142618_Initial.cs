@@ -159,7 +159,8 @@ namespace Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    user_name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    password = table.Column<string>(type: "varchar(255)", nullable: false),
                     email = table.Column<string>(type: "varchar(255)", nullable: false),
                     role_id = table.Column<Guid>(type: "uuid", nullable: false),
                     project_task_id = table.Column<Guid>(type: "uuid", nullable: true)

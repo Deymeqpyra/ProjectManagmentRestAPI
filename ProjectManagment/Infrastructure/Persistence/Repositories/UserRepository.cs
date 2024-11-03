@@ -23,6 +23,15 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
         
         return entity == null ? Option.None<User>() : Option.Some(entity);
     }
+    public async Task<Option<User>> GetByName(string name, CancellationToken cancellationToken)
+    {
+        var entity = await context.Users
+            .AsNoTracking()
+            .Include(x=>x.Role)
+            .FirstOrDefaultAsync(x=>x.UserName == name, cancellationToken);
+        
+        return entity == null ? Option.None<User>() : Option.Some(entity);
+    }
     public async Task<User> Create(User user, CancellationToken cancellationToken)
     {
         await context.Users.AddAsync(user, cancellationToken);
