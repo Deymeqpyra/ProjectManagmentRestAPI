@@ -1,3 +1,4 @@
+using Api.Dtos.CategoriesDto;
 using Domain.Tasks;
 
 namespace Api.Dtos.TaskDto;
@@ -7,7 +8,8 @@ public record ProjectTaskDto(
     string Title, 
     bool? completed,
     string Description,
-    Guid CategoryId)
+    Guid CategoryId,
+    CategoryDto? Category)
 {
     public static ProjectTaskDto FromProjectTask(ProjectTask projectTask)
     => new(
@@ -15,5 +17,7 @@ public record ProjectTaskDto(
         Title: projectTask.Title,
         completed: projectTask.IsFinished,
         Description: projectTask.ShortDescription,
-        CategoryId: projectTask.CategoryId.Value);
+        CategoryId: projectTask.CategoryId.Value,
+        Category:  projectTask.Category == null ? null : CategoryDto.FromDomainModel(projectTask.Category)
+        );
 }
