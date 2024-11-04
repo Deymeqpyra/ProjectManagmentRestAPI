@@ -1,7 +1,9 @@
 using Api.Dtos.ProjectDto;
+using Api.Dtos.TagsProjects;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Projects.Commands;
+using Application.TagsProjects.Commands;
 using Domain.Projects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +49,58 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             p => ProjectDto.FromProject(p),
             e => e.ToObjectResult());
     }
+
+    [HttpPost("AddTag/{tagId:guid}/toProject/{projectId:guid}")]
+    public async Task<ActionResult<TagProjectDto>> AddTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
+        CancellationToken cancellationToken)
+    {
+        var input = new AddTagForProjectCommand
+        {
+            ProjectId = projectId,
+            TagId = tagId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<TagProjectDto>>(
+            p => TagProjectDto.FromProject(p),
+            e => e.ToObjectResult());
+    }
+    [HttpPut("addComment/{projectId:guid}")]
+    public async Task<ActionResult<ProjectDto>> AddComment(
+        [FromRoute] Guid projectId, 
+        [FromBody] string comment,
+        CancellationToken cancellationToken)
+    {
+        var input = new AddComentToProjectCommand()
+        {
+            ProjectId = projectId,
+            CommentMessage = comment
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<ProjectDto>>(
+            p => ProjectDto.FromProject(p),
+            e => e.ToObjectResult());
+    }
+    [HttpDelete("Delete/{tagId:guid}/inProject/{projectId:guid}")]
+    public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
+        CancellationToken cancellationToken)
+    {
+        var input = new DeleteTagFromProjectCommand
+        {
+            ProjectId = projectId,
+            TagId = tagId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<TagProjectDto>>(
+            p => TagProjectDto.FromProject(p),
+            e => e.ToObjectResult());
+    }
+
 
     [HttpPut("update/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> Update([FromRoute] Guid projectId, [FromBody] UpdateProjectDto dto,

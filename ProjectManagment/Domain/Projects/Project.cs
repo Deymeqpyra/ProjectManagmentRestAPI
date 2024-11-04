@@ -19,7 +19,6 @@ public class Project
 
     public ProjectPriorityId ProjectPriorityId { get; private set; }
     public ProjectPriority? ProjectPriority { get; }
-
     public ICollection<TagsProject> TagsProjects { get; } = [];
     public ICollection<ProjectUser> ProjectUsers { get; } = [];
     public List<string> Comments { get; private set; } = [];

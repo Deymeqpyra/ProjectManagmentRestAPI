@@ -12,6 +12,8 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
     {
         return await context.Projects
             .AsNoTracking()
+            .Include(x=>x.TagsProjects)
+            .ThenInclude(x=>x.Tag)
             .Include(x => x.ProjectPriority)
             .Include(x => x.ProjectStatus)
             .ToListAsync(cancellationToken);

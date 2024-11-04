@@ -14,6 +14,7 @@ public class TagProjectRepository(ApplicationDbContext context) : ITagProjectRep
     {
         return await context.TagsProjects
             .Where(t => t.ProjectId == projectId)
+            .Include(t => t.Tag)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
@@ -21,6 +22,7 @@ public class TagProjectRepository(ApplicationDbContext context) : ITagProjectRep
     {
         return await context.TagsProjects
             .Where(t => t.TagId == tagId)
+            .Include(t => t.Tag)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
@@ -28,6 +30,7 @@ public class TagProjectRepository(ApplicationDbContext context) : ITagProjectRep
     {
         var entity = await context.TagsProjects
             .AsNoTracking()
+            .Include(t => t.Tag)
             .FirstOrDefaultAsync(x=>x.TagId == tagId && x.ProjectId == projectId, cancellationToken);
         
         return entity == null ? Option.None<TagsProject>() : Option.Some(entity);

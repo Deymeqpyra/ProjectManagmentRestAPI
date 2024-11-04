@@ -13,6 +13,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
         return await context.Users
             .AsNoTracking()
             .Include(u => u.Role)
+            .Include(x=>x.ProjectTask)
             .ToListAsync(cancellationToken);
     }
 
@@ -21,6 +22,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
         var entity = await context.Users
             .AsNoTracking()
             .Include(u => u.Role)
+            .Include(x=>x.ProjectTask)
             .FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);
         
         return entity == null ? Option.None<User>() : Option.Some(entity);

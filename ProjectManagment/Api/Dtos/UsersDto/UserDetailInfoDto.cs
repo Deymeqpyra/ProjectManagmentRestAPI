@@ -12,7 +12,9 @@ public record UserDetailInfoDto(
     string password,
     string email,
     Guid roleId,
-    RoleDto? role
+    RoleDto? role,
+    Guid? TaskId, 
+    UserTaskDto? UserTask
     )
 {
     public static UserDetailInfoDto FromUser(User user)
@@ -22,6 +24,8 @@ public record UserDetailInfoDto(
             password: user.Password,
             email: user.Email,
             roleId: user.RoleId.value,
-            role: user.Role == null ? null : RoleDto.FromDomainModel(user.Role)
+            role: user.Role == null ? null : RoleDto.FromDomainModel(user.Role),
+            TaskId: user.ProjectTaskId?.value,
+            UserTask: user.ProjectTask == null ? null : UserTaskDto.FromTask(user.ProjectTask)
         );
 }
