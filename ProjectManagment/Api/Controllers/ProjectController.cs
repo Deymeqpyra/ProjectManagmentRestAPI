@@ -1,10 +1,13 @@
 using Api.Dtos.ProjectDto;
+using Api.Dtos.ProjectsUsersDto;
 using Api.Dtos.TagsProjects;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.Projects.Commands;
+using Application.ProjectsUsers.Commands;
 using Application.TagsProjects.Commands;
 using Domain.Projects;
+using Domain.ProjectUsers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -84,6 +87,44 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             p => ProjectDto.FromProject(p),
             e => e.ToObjectResult());
     }
+    [HttpPut("addUser/{userId:guid}/toProject/{projectId:guid}")]
+    public async Task<ActionResult<ProjectUsersDto>> AddUserToProjet(
+        [FromRoute] Guid projectId, 
+        [FromRoute] Guid userId,
+        CancellationToken cancellationToken)
+    {
+        var input = new AddUserToProjectCommand
+        {
+            ProjectId = projectId,
+            UserId = userId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<ProjectUsersDto>>(
+            p => ProjectUsersDto.FromProject(p),
+            e => e.ToObjectResult());
+    }
+    
+    [HttpDelete("deleteUser/{userId:guid}/fromProject/{projectId:guid}")]
+    public async Task<ActionResult<ProjectUsersDto>> DeleteUserFromProjet(
+        [FromRoute] Guid projectId, 
+        [FromRoute] Guid userId,
+        CancellationToken cancellationToken)
+    {
+        var input = new DeleteUserFromProjectCommand
+        {
+            ProjectId = projectId,
+            UserId = userId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<ProjectUsersDto>>(
+            p => ProjectUsersDto.FromProject(p),
+            e => e.ToObjectResult());
+    }
+    
     [HttpDelete("Delete/{tagId:guid}/inProject/{projectId:guid}")]
     public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)

@@ -18,7 +18,7 @@ public class ProjectUserRepository(ApplicationDbContext context) : IProjectUserR
             .AsNoTracking()
             .Where(p => p.ProjectId == projectId)
             .Select(x=>x.User)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
     }
 
     public async Task<IReadOnlyList<Project?>> GetProjectByUser(UserId userId, CancellationToken cancellationToken)
@@ -27,7 +27,17 @@ public class ProjectUserRepository(ApplicationDbContext context) : IProjectUserR
             .AsNoTracking()
             .Where(x=>x.UserId == userId)
             .Select(x=>x.Project)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<ProjectUser>> GetProjectUserByProject(ProjectId projectId,
+        CancellationToken cancellationToken)
+    {
+        return await context.ProjectUsers
+            .AsNoTracking()
+            .Where(x => x.ProjectId == projectId)
+            .Include(x => x.User)
+            .ToListAsync(cancellationToken);
     }
 
     public async Task<Option<ProjectUser>> GetByIds(ProjectId projectId, UserId userId, CancellationToken cancellationToken)

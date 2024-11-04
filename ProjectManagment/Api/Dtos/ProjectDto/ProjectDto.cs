@@ -1,6 +1,8 @@
 using Api.Dtos.PrioritiesDto;
+using Api.Dtos.ProjectsUsersDto;
 using Api.Dtos.StatusesDto;
 using Api.Dtos.TagsProjects;
+using Api.Dtos.UsersDto;
 using Domain.Priorities;
 using Domain.Projects;
 
@@ -15,6 +17,7 @@ public record ProjectDto(
     Guid PriorityId,
     PriorityDto? Priority,
     List<TagForProjectDto> tagProjects,
+    List<UserForProjectDto> userProjects,
     List<string> Comments)
 {
     public static ProjectDto FromProject(Project project)
@@ -26,6 +29,7 @@ public record ProjectDto(
         PriorityId: project.ProjectPriorityId.value,
         Comments: project.Comments,
         Priority: project.ProjectPriority == null ? null : PriorityDto.FromDomainModel(project.ProjectPriority),
-        tagProjects: project.TagsProjects.Select(TagForProjectDto.FromTag).ToList()
+        tagProjects: project.TagsProjects.Select(TagForProjectDto.FromTag).ToList(),
+        userProjects: project.ProjectUsers.Select(UserForProjectDto.FromUserShortInfo).ToList()
         );
 }
