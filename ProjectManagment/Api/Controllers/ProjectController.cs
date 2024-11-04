@@ -9,19 +9,21 @@ using Application.TagsProjects.Commands;
 using Domain.Projects;
 using Domain.ProjectUsers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [Route("projects")]
 [ApiController]
+[Authorize]
 public class ProjectController(ISender sender, IProjectQueries projectQueries) : ControllerBase
 {
     [HttpGet("getAll")]
     public async Task<ActionResult<IReadOnlyList<ProjectDto>>> GetProjects(CancellationToken cancellationToken)
     {
         var entities = await projectQueries.GetAll(cancellationToken);
-        
+
         return entities.Select(ProjectDto.FromProject).ToList();
     }
 
@@ -29,14 +31,15 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<ProjectDto>> GetProjectById(Guid projectId, CancellationToken cancellationToken)
     {
         var entity = await projectQueries.GetById(new ProjectId(projectId), cancellationToken);
-        
+
         return entity.Match<ActionResult<ProjectDto>>(
-            p=>ProjectDto.FromProject(p),
+            p => ProjectDto.FromProject(p),
             () => NotFound());
     }
 
     [HttpPost("create")]
-    public async Task<ActionResult<ProjectDto>> Create([FromBody] CreateProjectDto dto, CancellationToken cancellationToken)
+    public async Task<ActionResult<ProjectDto>> Create([FromBody] CreateProjectDto dto,
+        CancellationToken cancellationToken)
     {
         var input = new CreateProjectCommand
         {
@@ -45,7 +48,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             PriorityId = dto.priorityId,
             StatusId = dto.statusId
         };
-        
+
         var result = await sender.Send(input, cancellationToken);
 
         return result.Match<ActionResult<ProjectDto>>(
@@ -69,9 +72,10 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             p => TagProjectDto.FromProject(p),
             e => e.ToObjectResult());
     }
+
     [HttpPut("addComment/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> AddComment(
-        [FromRoute] Guid projectId, 
+        [FromRoute] Guid projectId,
         [FromBody] string comment,
         CancellationToken cancellationToken)
     {
@@ -87,9 +91,10 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             p => ProjectDto.FromProject(p),
             e => e.ToObjectResult());
     }
+
     [HttpPut("addUser/{userId:guid}/toProject/{projectId:guid}")]
     public async Task<ActionResult<ProjectUsersDto>> AddUserToProjet(
-        [FromRoute] Guid projectId, 
+        [FromRoute] Guid projectId,
         [FromRoute] Guid userId,
         CancellationToken cancellationToken)
     {
@@ -105,10 +110,10 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             p => ProjectUsersDto.FromProject(p),
             e => e.ToObjectResult());
     }
-    
+
     [HttpDelete("deleteUser/{userId:guid}/fromProject/{projectId:guid}")]
     public async Task<ActionResult<ProjectUsersDto>> DeleteUserFromProjet(
-        [FromRoute] Guid projectId, 
+        [FromRoute] Guid projectId,
         [FromRoute] Guid userId,
         CancellationToken cancellationToken)
     {
@@ -124,7 +129,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             p => ProjectUsersDto.FromProject(p),
             e => e.ToObjectResult());
     }
-    
+
     [HttpDelete("Delete/{tagId:guid}/inProject/{projectId:guid}")]
     public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
@@ -155,10 +160,10 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
         };
 
         var result = await sender.Send(input, cancellationToken);
-        
+
         return result.Match<ActionResult<ProjectDto>>(
-            p=>ProjectDto.FromProject(p),
-            e=>e.ToObjectResult());
+            p => ProjectDto.FromProject(p),
+            e => e.ToObjectResult());
     }
 
     [HttpDelete("delete/{projectId:guid}")]
@@ -168,12 +173,12 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
         {
             ProjectId = projectId
         };
-        
+
         var result = await sender.Send(input, cancellationToken);
-        
+
         return result.Match<ActionResult<ProjectDto>>(
-            p=>ProjectDto.FromProject(p),
-            e=>e.ToObjectResult());
+            p => ProjectDto.FromProject(p),
+            e => e.ToObjectResult());
     }
 
     [HttpPut("updateStatus/{projectId:guid}/status/{statusId:guid}")]
@@ -187,12 +192,12 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
         };
 
         var result = await sender.Send(input, cancellationToken);
-        
+
         return result.Match<ActionResult<ProjectDto>>
-            (p=>ProjectDto.FromProject(p),
-            e=>e.ToObjectResult());
+        (p => ProjectDto.FromProject(p),
+            e => e.ToObjectResult());
     }
-    
+
     [HttpPut("updatePriority/{projectId:guid}/priority/{priorityId:guid}")]
     public async Task<ActionResult<ProjectDto>> ChangePriority([FromRoute] Guid projectId, [FromRoute] Guid priorityId,
         CancellationToken cancellationToken)
@@ -204,9 +209,9 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
         };
 
         var result = await sender.Send(input, cancellationToken);
-        
+
         return result.Match<ActionResult<ProjectDto>>
-            (p=>ProjectDto.FromProject(p),
-            e=>e.ToObjectResult());
+        (p => ProjectDto.FromProject(p),
+            e => e.ToObjectResult());
     }
 }

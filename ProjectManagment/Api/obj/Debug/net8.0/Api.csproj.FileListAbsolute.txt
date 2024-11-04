@@ -373,3 +373,11 @@ E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\refint
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\Api.pdb
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\Api.genruntimeconfig.cache
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\obj\Debug\net8.0\ref\Api.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

@@ -1,3 +1,4 @@
+using System.Xml.Schema;
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Domain.Users;
@@ -40,6 +41,14 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
         var entity = await context.Users
             .AsNoTracking()
             .FirstOrDefaultAsync(x=>x.Email == email, cancellationToken);
+        
+        return entity == null ? Option.None<User>() : Option.Some(entity);
+    }
+    public async Task<Option<User>> GetByEmailAndPassword(string email, string password, CancellationToken cancellationToken)
+    {
+        var entity = await context.Users
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x=>x.Email == email & x.Password == password, cancellationToken);
         
         return entity == null ? Option.None<User>() : Option.Some(entity);
     }
