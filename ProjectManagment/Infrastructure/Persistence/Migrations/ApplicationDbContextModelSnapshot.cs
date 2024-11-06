@@ -119,6 +119,10 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("title");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("ProjectId")
                         .HasName("pk_projects");
 
@@ -127,6 +131,9 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProjectStatusId")
                         .HasDatabaseName("ix_projects_project_status_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_projects_user_id");
 
                     b.ToTable("projects", (string)null);
                 });
@@ -237,6 +244,10 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
                     b.HasKey("TaskId")
                         .HasName("pk_project_tasks");
 
@@ -245,6 +256,9 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProjectId")
                         .HasDatabaseName("ix_project_tasks_project_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_project_tasks_user_id");
 
                     b.ToTable("project_tasks", (string)null);
                 });
@@ -327,9 +341,18 @@ namespace Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_project_status_id");
 
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_project_user_id");
+
                     b.Navigation("ProjectPriority");
 
                     b.Navigation("ProjectStatus");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.TagsProjects.TagsProject", b =>
@@ -369,9 +392,18 @@ namespace Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_project_task_project_id");
 
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_project_user_id");
+
                     b.Navigation("Category");
 
                     b.Navigation("Project");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>

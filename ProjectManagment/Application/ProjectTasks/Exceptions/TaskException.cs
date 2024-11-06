@@ -19,3 +19,9 @@ public class TaskAlreadyFinished(ProjectTaskId taskId)
 
 public class TaskUnknowException(ProjectTaskId taskId, Exception innerException)
     : TaskException(taskId, $"Unknown exception for task with id: {taskId} ", innerException);
+
+public class UserNotFoundWhileCreated(ProjectTaskId taskId)
+    : TaskException(taskId, $"User not found");
+    
+public class NotEnoughPermission(ProjectTaskId taskId)
+    : TaskException(taskId, $"You don't have enough permission to perform this action ");

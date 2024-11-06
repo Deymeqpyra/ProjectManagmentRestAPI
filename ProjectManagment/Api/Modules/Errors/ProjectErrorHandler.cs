@@ -14,6 +14,8 @@ public static class ProjectErrorHandler
                 ProjectNotFound => StatusCodes.Status404NotFound,
                 ProjectAlreadyExist => StatusCodes.Status409Conflict,
                 ProjectUnknownException => StatusCodes.Status400BadRequest,
+                UserNotFoundWhileCreated => StatusCodes.Status404NotFound,
+                NotEnoughPermission => StatusCodes.Status403Forbidden,
                 _ => StatusCodes.Status500InternalServerError
             }
         };

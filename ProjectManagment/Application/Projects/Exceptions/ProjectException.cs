@@ -25,3 +25,8 @@ public class StatusNotFound(ProjectId projectId, ProjectStatusId statusId)
 
 public class PriorityNotFound(ProjectId projectId, ProjectPriorityId priorityId)
     : ProjectException(projectId, $"Priority was not found {priorityId}, when tried to set to project {projectId}");
+public class UserNotFoundWhileCreated(ProjectId projectId)
+    : ProjectException(projectId, $"User not found");
+    
+public class NotEnoughPermission(ProjectId projectId)
+    : ProjectException(projectId, $"You don't have enough permission to perform this action ");

@@ -2,6 +2,7 @@ using Domain.Priorities;
 using Domain.ProjectUsers;
 using Domain.Statuses;
 using Domain.TagsProjects;
+using Domain.Users;
 
 namespace Domain.Projects;
 
@@ -13,8 +14,6 @@ public class Project
     public string Description { get; private set; }
 
     public DateTime LastUpdate { get; private set; }
-
-    // ToDo: UserId
     public ProjectStatusId ProjectStatusId { get; private set;  }
     public ProjectStatus? ProjectStatus { get; }
 
@@ -22,6 +21,9 @@ public class Project
     public ProjectPriority? ProjectPriority { get; }
     public ICollection<TagsProject> TagsProjects { get; } = [];
     public ICollection<ProjectUser> ProjectUsers { get; } = [];
+    
+    public UserId UserId { get; private set; }
+    public User? User { get;  }
     public List<string> Comments { get; private set; } = [];
 
     private Project(
@@ -29,6 +31,7 @@ public class Project
         string title,
         string description,
         DateTime lastUpdate,
+        UserId userId,
         ProjectStatusId projectStatusId,
         ProjectPriorityId projectPriorityId
         )
@@ -37,6 +40,7 @@ public class Project
         Title = title;
         Description = description;
         LastUpdate = lastUpdate;
+        UserId = userId;
         ProjectStatusId = projectStatusId;
         ProjectPriorityId = projectPriorityId;
     }
@@ -45,9 +49,10 @@ public class Project
         ProjectId projectId,
         string title,
         string description,
+        UserId userId,
         ProjectStatusId projectStatusId,
         ProjectPriorityId projectPriorityId)
-        => new(projectId, title, description, DateTime.UtcNow, projectStatusId, projectPriorityId);
+        => new(projectId, title, description, DateTime.UtcNow, userId, projectStatusId, projectPriorityId);
 
     public void UpdateDetails(
         string updateTitle, 

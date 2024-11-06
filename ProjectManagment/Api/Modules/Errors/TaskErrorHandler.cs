@@ -15,6 +15,8 @@ public static class TaskErrorHandler
                 TaskAlreadyFinished => StatusCodes.Status409Conflict,
                 TaskAlreadyExistsException => StatusCodes.Status409Conflict,
                 TaskUnknowException => StatusCodes.Status500InternalServerError,
+                UserNotFoundWhileCreated => StatusCodes.Status404NotFound,
+                NotEnoughPermission => StatusCodes.Status403Forbidden,
                 _ => StatusCodes.Status500InternalServerError
             }
         };

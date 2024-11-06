@@ -10,5 +10,6 @@ public class CreateTaskForProjectCommandValidator : AbstractValidator<CreateTask
         RuleFor(x=>x.ShortDescription).NotEmpty().MaximumLength(100).MinimumLength(10);
         RuleFor(x=>x.ProjectId).NotEmpty();
         RuleFor(x=>x.CategoryId).NotEmpty();
+        RuleFor(x => x.UserId).NotEmpty();
     }
 }

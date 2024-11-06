@@ -8,5 +8,6 @@ public class SetStatusProjectCommandValidator : AbstractValidator<SetStatusProje
     {
         RuleFor(x => x.ProjectId).NotEmpty();
         RuleFor(x => x.ProjectStatusId).NotEmpty();
+        RuleFor(x => x.UserId).NotEmpty();
     }
 }

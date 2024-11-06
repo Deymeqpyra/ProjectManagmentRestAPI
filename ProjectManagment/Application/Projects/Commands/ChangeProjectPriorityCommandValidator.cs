@@ -8,5 +8,6 @@ public class ChangeProjectPriorityCommandValidator : AbstractValidator<ChangePro
     {
         RuleFor(x => x.ProjectId).NotEmpty();
         RuleFor(x=>x.PriorityId).NotEmpty();
+        RuleFor(x=>x.UserId).NotEmpty();
     }
 }

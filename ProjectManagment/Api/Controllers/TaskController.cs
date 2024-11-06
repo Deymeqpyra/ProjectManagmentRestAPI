@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Api.Dtos.TasksDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
@@ -5,7 +6,6 @@ using Application.ProjectTasks.Commands;
 using Domain.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -41,12 +41,15 @@ public class TaskController(ISender sender, ITaskQueries taskQueries) : Controll
     public async Task<ActionResult<ProjectTaskDto>> Create([FromBody] CreateTaskDto projectTaskDto,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new CreateTaskForProjectCommand
         {
             TaskTitle = projectTaskDto.title,
             CategoryId = projectTaskDto.categoryId,
             ProjectId = projectTaskDto.projectId,
-            ShortDescription = projectTaskDto.description
+            ShortDescription = projectTaskDto.description,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -61,9 +64,12 @@ public class TaskController(ISender sender, ITaskQueries taskQueries) : Controll
     public async Task<ActionResult<ProjectTaskDto>> FinishTask([FromRoute] Guid taskId,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new FinishTaskCommand
         {
-            TaskId = taskId
+            TaskId = taskId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -79,12 +85,15 @@ public class TaskController(ISender sender, ITaskQueries taskQueries) : Controll
         [FromBody] ProjectTaskDto projectTaskDto,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new UpdateTaskCommand
         {
             TaskId = taskId,
             TitleUpdate = projectTaskDto.Title,
             DescriptionUpdate = projectTaskDto.Description,
-            CategoryIdUpdate = projectTaskDto.CategoryId
+            CategoryIdUpdate = projectTaskDto.CategoryId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -98,9 +107,12 @@ public class TaskController(ISender sender, ITaskQueries taskQueries) : Controll
     [HttpDelete("Delete/{taskId:guid}")]
     public async Task<ActionResult<ProjectTaskDto>> Delete([FromRoute] Guid taskId, CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new DeleteTaskCommand
         {
-            TaskId = taskId
+            TaskId = taskId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);

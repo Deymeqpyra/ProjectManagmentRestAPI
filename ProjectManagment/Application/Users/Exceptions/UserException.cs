@@ -27,3 +27,5 @@ public class UserAlreadyAssinedToTask(UserId userId, ProjectTaskId taskId)
 
 public class TaskNotFound(UserId userId, ProjectTaskId taskId)
     : UserException(userId, $"Task {taskId} not found, while trying to assign to user {userId}");
+public class WrongCrenditals(UserId userId)
+    : UserException(userId, $"Wrong password or email address");

@@ -26,7 +26,7 @@ public class LoginUserCommandHandler(IUserRepository repository)
 
         return await user.Match(
              u =>  GenerateToken(u),
-            () => Task.FromResult<Result<string, UserException>>(new UserNotFoundException(UserId.Empty())));
+            () => Task.FromResult<Result<string, UserException>>(new WrongCrenditals(UserId.Empty())));
     }
 
     private async Task<Result<string, UserException>> GenerateToken(User user)
@@ -42,7 +42,6 @@ public class LoginUserCommandHandler(IUserRepository repository)
                 new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new(JwtRegisteredClaimNames.Email, user.Email),
                 new(ClaimTypes.Role, user.Role!.Name)
-                // TODO: ROLES
             };
 
             var tokenDescription = new SecurityTokenDescriptor

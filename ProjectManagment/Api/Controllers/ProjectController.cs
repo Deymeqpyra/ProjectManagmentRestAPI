@@ -44,12 +44,15 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<ProjectDto>> Create([FromBody] CreateProjectDto dto,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new CreateProjectCommand
         {
             Title = dto.Title,
             Description = dto.Description,
             PriorityId = dto.priorityId,
-            StatusId = dto.statusId
+            StatusId = dto.statusId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -142,6 +145,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
     {
+        
         var input = new DeleteTagFromProjectCommand
         {
             ProjectId = projectId,
@@ -160,11 +164,14 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<ProjectDto>> Update([FromRoute] Guid projectId, [FromBody] UpdateProjectDto dto,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new UpdateProjectDetailsCommand
         {
             ProjectId = projectId,
             UpdateTitle = dto.Title,
-            UpdateDescription = dto.Description
+            UpdateDescription = dto.Description,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -178,9 +185,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     [HttpDelete("delete/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> Delete([FromRoute] Guid projectId, CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new DeleteProjectCommand
         {
-            ProjectId = projectId
+            ProjectId = projectId,
+            UserId = userId
+            
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -195,10 +206,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<ProjectDto>> SetStatus([FromRoute] Guid projectId, [FromRoute] Guid statusId,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new SetStatusProjectCommand
         {
             ProjectId = projectId,
-            ProjectStatusId = statusId
+            ProjectStatusId = statusId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -213,10 +227,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<ProjectDto>> ChangePriority([FromRoute] Guid projectId, [FromRoute] Guid priorityId,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new ChangeProjectPriorityCommand
         {
             ProjectId = projectId,
-            PriorityId = priorityId
+            PriorityId = priorityId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
