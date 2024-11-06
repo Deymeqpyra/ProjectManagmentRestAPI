@@ -4,6 +4,7 @@ using Application.Common.Interfaces.Queries;
 using Application.Users.Commands;
 using Domain.Users;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -12,6 +13,7 @@ namespace Api.Controllers;
 [ApiController]
 public class UserController(ISender sender, IUserQueries userQueries) : ControllerBase
 {
+    [Authorize(Roles = "Admin, User")]
     [HttpGet("getall")]
     public async Task<ActionResult<IReadOnlyList<UserDetailInfoDto>>> GetAllUsers(CancellationToken cancellationToken)
     {
@@ -19,7 +21,8 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
 
         return entites.Select(UserDetailInfoDto.FromUser).ToList();
     }
-
+    
+    [Authorize(Roles = "Admin, User")]
     [HttpGet("getbyid/{userId:guid}")]
     public async Task<ActionResult<UserDetailInfoDto>> GetUserById([FromRoute] Guid userId,
         CancellationToken cancellationToken)
@@ -48,8 +51,8 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
         (u => CreateUserDto.FromUser(u),
             e => e.ToObjectResult());
     }
-    
-    [HttpPost("authenticate")]
+
+    [HttpGet("authenticate")]
     public async Task<ActionResult<string>> LoginUser([FromBody] LoginUserDto loginUserDto,
         CancellationToken cancellationToken)
     {
@@ -137,7 +140,8 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
             u => UserDetailInfoDto.FromUser(u),
             e => e.ToObjectResult());
     }
-
+    
+    [Authorize(Roles = "Admin")]
     [HttpDelete("delete/{userId:guid}")]
     public async Task<ActionResult<UserDetailInfoDto>> Delete([FromRoute] Guid userId,
         CancellationToken cancellationToken)
@@ -154,6 +158,7 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("giveUser/{userId:guid}/role/{roleId:guid}")]
     public async Task<ActionResult<UserDetailInfoDto>> GiveUserToRole([FromRoute] Guid userId, [FromRoute] Guid roleId,
         CancellationToken cancellationToken)
@@ -163,7 +168,7 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
             UserId = userId,
             RoleId = roleId
         };
-        
+
         var result = await sender.Send(input, cancellationToken);
 
         return result.Match<ActionResult<UserDetailInfoDto>>(

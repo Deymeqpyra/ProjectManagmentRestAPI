@@ -4,14 +4,17 @@ using Application.Categories.Commands;
 using Application.Common.Interfaces.Queries;
 using Domain.Categories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [Route("categories")]
 [ApiController]
+[Authorize]
 public class CategoryController(ISender sender, ICategoryQueries categoryQueries) : ControllerBase
 {
+    [Authorize(Roles = "Admin, User")]
     [HttpGet("GetCategories")]
     public async Task<ActionResult<IReadOnlyList<CategoryDto>>> GetCategories(CancellationToken cancellationToken)
     {
@@ -20,6 +23,7 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
         return entities.Select(CategoryDto.FromDomainModel).ToList();
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpGet("GetCategory/{categoryId:guid}")]
     public async Task<ActionResult<CategoryDto>> GetCategoryById(
         [FromRoute] Guid categoryId,
@@ -30,8 +34,9 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
         return entity.Match<ActionResult<CategoryDto>>(
             c => CategoryDto.FromDomainModel(c),
             () => NotFound());
-    }   
+    }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost("CreateCategory")]
     public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] string categoryName,
         CancellationToken cancellationToken)
@@ -46,6 +51,7 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("UpdateCategory/{categoryId:guid}")]
     public async Task<ActionResult<CategoryDto>> UpdateCategory(
         [FromRoute] Guid categoryId,
@@ -58,14 +64,15 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
             CategoryId = catId.Value,
             CategoryName = categoryName
         };
-        
+
         var result = await sender.Send(input, cancellationToken);
-        
+
         return result.Match<ActionResult<CategoryDto>>(
-            c=>CategoryDto.FromDomainModel(c),
-            e=>e.ToObjectResult());
+            c => CategoryDto.FromDomainModel(c),
+            e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("DeleteCategory/{categoryId:guid}")]
     public async Task<ActionResult<CategoryDto>> Delete([FromRoute] Guid categoryId,
         CancellationToken cancellationToken)
@@ -75,7 +82,7 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
         {
             CategoryId = catId.Value
         };
-        
+
         var result = await sender.Send(input, cancellationToken);
 
         return result.Match<ActionResult<CategoryDto>>(

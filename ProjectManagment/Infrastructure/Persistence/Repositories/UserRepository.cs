@@ -47,6 +47,9 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
     public async Task<Option<User>> GetByEmailAndPassword(string email, string password, CancellationToken cancellationToken)
     {
         var entity = await context.Users
+            .Include(x=>x.Role)
+            .Include(x=>x.ProjectUsers)
+                .ThenInclude(x=>x.Project)
             .AsNoTracking()
             .SingleOrDefaultAsync(x=>x.Email == email & x.Password == password, cancellationToken);
         

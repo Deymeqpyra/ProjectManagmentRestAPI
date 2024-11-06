@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Api.Dtos.ProjectDto;
 using Api.Dtos.ProjectsUsersDto;
 using Api.Dtos.TagsProjects;
@@ -7,7 +8,6 @@ using Application.Projects.Commands;
 using Application.ProjectsUsers.Commands;
 using Application.TagsProjects.Commands;
 using Domain.Projects;
-using Domain.ProjectUsers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +19,7 @@ namespace Api.Controllers;
 [Authorize]
 public class ProjectController(ISender sender, IProjectQueries projectQueries) : ControllerBase
 {
+    [Authorize(Roles = "Admin, User")]
     [HttpGet("getAll")]
     public async Task<ActionResult<IReadOnlyList<ProjectDto>>> GetProjects(CancellationToken cancellationToken)
     {
@@ -26,6 +27,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
 
         return entities.Select(ProjectDto.FromProject).ToList();
     }
+
 
     [HttpGet("getById/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> GetProjectById(Guid projectId, CancellationToken cancellationToken)
@@ -37,6 +39,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             () => NotFound());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpPost("create")]
     public async Task<ActionResult<ProjectDto>> Create([FromBody] CreateProjectDto dto,
         CancellationToken cancellationToken)
@@ -56,6 +59,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpPost("AddTag/{tagId:guid}/toProject/{projectId:guid}")]
     public async Task<ActionResult<TagProjectDto>> AddTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
@@ -73,6 +77,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("addComment/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> AddComment(
         [FromRoute] Guid projectId,
@@ -92,6 +97,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("addUser/{userId:guid}/toProject/{projectId:guid}")]
     public async Task<ActionResult<ProjectUsersDto>> AddUserToProjet(
         [FromRoute] Guid projectId,
@@ -111,6 +117,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpDelete("deleteUser/{userId:guid}/fromProject/{projectId:guid}")]
     public async Task<ActionResult<ProjectUsersDto>> DeleteUserFromProjet(
         [FromRoute] Guid projectId,
@@ -130,6 +137,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpDelete("Delete/{tagId:guid}/inProject/{projectId:guid}")]
     public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
@@ -147,7 +155,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
-
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("update/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> Update([FromRoute] Guid projectId, [FromBody] UpdateProjectDto dto,
         CancellationToken cancellationToken)
@@ -166,6 +174,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpDelete("delete/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> Delete([FromRoute] Guid projectId, CancellationToken cancellationToken)
     {
@@ -181,6 +190,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("updateStatus/{projectId:guid}/status/{statusId:guid}")]
     public async Task<ActionResult<ProjectDto>> SetStatus([FromRoute] Guid projectId, [FromRoute] Guid statusId,
         CancellationToken cancellationToken)
@@ -198,6 +208,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             e => e.ToObjectResult());
     }
 
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("updatePriority/{projectId:guid}/priority/{priorityId:guid}")]
     public async Task<ActionResult<ProjectDto>> ChangePriority([FromRoute] Guid projectId, [FromRoute] Guid priorityId,
         CancellationToken cancellationToken)

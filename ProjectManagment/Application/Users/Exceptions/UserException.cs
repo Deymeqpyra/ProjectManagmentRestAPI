@@ -17,7 +17,7 @@ public class UserAlreadyExistsException(UserId userId)
     : UserException(userId, $"User {userId} already exists");
 
 public class UserUnknownException(UserId userId, Exception innerException)
-    : UserException(userId, $"User {userId} unknown", innerException);
+    : UserException(userId, $"User {userId} unknown, {innerException}", innerException);
 
 public class RoleNotFound(UserId userId, RoleId roleId)
     : UserException(userId, $"Role {roleId} not found, while trying to assign to user {userId}");

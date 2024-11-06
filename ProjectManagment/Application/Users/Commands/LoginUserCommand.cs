@@ -25,7 +25,7 @@ public class LoginUserCommandHandler(IUserRepository repository)
         var user = await repository.GetByEmailAndPassword(request.Email, request.PassWord, cancellationToken);
 
         return await user.Match(
-            u => GenerateToken(u),
+             u =>  GenerateToken(u),
             () => Task.FromResult<Result<string, UserException>>(new UserNotFoundException(UserId.Empty())));
     }
 
@@ -41,6 +41,8 @@ public class LoginUserCommandHandler(IUserRepository repository)
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new(JwtRegisteredClaimNames.Email, user.Email),
+                new(ClaimTypes.Role, user.Role!.Name)
+                // TODO: ROLES
             };
 
             var tokenDescription = new SecurityTokenDescriptor

@@ -15,6 +15,7 @@ public class ProjectTask
     public ProjectId ProjectId { get; private set; }
     public Project? Project { get; }
 
+    // TODO: UserID
     public CategoryId CategoryId { get; private set; }
     public Category? Category { get; }
 

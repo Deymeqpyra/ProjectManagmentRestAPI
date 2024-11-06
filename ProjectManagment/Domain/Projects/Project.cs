@@ -14,6 +14,7 @@ public class Project
 
     public DateTime LastUpdate { get; private set; }
 
+    // ToDo: UserId
     public ProjectStatusId ProjectStatusId { get; private set;  }
     public ProjectStatus? ProjectStatus { get; }
 
