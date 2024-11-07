@@ -15,7 +15,16 @@ builder.Services.AddApplication();
 builder.Services.SetupServices();
 
 builder.Services.AddAuthorization();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") 
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 
 var app = builder.Build();
@@ -25,6 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseAuthentication();
 app.UseAuthorization();
