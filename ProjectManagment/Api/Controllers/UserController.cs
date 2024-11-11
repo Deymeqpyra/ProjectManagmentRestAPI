@@ -52,7 +52,7 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
             e => e.ToObjectResult());
     }
 
-    [HttpGet("authenticate")]
+    [HttpPost("authenticate")]
     public async Task<ActionResult<string>> LoginUser([FromBody] LoginUserDto loginUserDto,
         CancellationToken cancellationToken)
     {
