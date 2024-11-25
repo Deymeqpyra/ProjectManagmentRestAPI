@@ -38,11 +38,11 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
 
     [Authorize(Roles = "Admin")]
     [HttpPost("CreateCategory")]
-    public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] string categoryName,
+    public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] CreateCategoryDto category,
         CancellationToken cancellationToken)
     {
         var input = new CreateCategoryCommand
-            { Name = categoryName };
+            { Name = category.Name};
 
         var result = await sender.Send(input, cancellationToken);
 

@@ -381,3 +381,4 @@ E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Micros
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api\bin\Debug\net8.0\appsettings.Test.json

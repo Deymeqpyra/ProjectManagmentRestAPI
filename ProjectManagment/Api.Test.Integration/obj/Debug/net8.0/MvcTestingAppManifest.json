@@ -1,0 +1,8 @@
+{
+  "Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Api",
+  "Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Application",
+  "Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Domain",
+  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Infrastructure",
+  "Test.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Test.Common",
+  "Test.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\Projects\\ProjectManagmentRestAPI\\ProjectManagment\\Test.Data"
+}
