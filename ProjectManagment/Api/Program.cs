@@ -43,4 +43,4 @@ await app.InitializeDb();
 app.MapControllers(); 
 
 app.Run();
-
+public partial class Program;
