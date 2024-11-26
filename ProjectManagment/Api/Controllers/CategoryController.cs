@@ -55,14 +55,14 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
     [HttpPut("UpdateCategory/{categoryId:guid}")]
     public async Task<ActionResult<CategoryDto>> UpdateCategory(
         [FromRoute] Guid categoryId,
-        [FromBody] string categoryName,
+        [FromBody] CreateCategoryDto categoryDto,
         CancellationToken cancellationToken)
     {
         var catId = new CategoryId(categoryId);
         var input = new UpdateCategoryCommand
         {
             CategoryId = catId.Value,
-            CategoryName = categoryName
+            CategoryName = categoryDto.Name
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -77,10 +77,9 @@ public class CategoryController(ISender sender, ICategoryQueries categoryQueries
     public async Task<ActionResult<CategoryDto>> Delete([FromRoute] Guid categoryId,
         CancellationToken cancellationToken)
     {
-        var catId = new CategoryId(categoryId);
         var input = new DeleteCategoryCommand
         {
-            CategoryId = catId.Value
+            CategoryId = categoryId
         };
 
         var result = await sender.Send(input, cancellationToken);
