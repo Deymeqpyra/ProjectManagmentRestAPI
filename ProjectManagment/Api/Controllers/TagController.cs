@@ -39,12 +39,12 @@ public class TagController(ISender sender, ITagQueries tagQueries) : ControllerB
     [Authorize(Roles = "Admin")]
     [HttpPost("AddTag")]
     public async Task<ActionResult<TagDto>> AddTag(
-        [FromBody] string name,
+        [FromBody] CreateTagDto tagDto,
         CancellationToken cancellationToken)
     {
         var input = new CreateTagCommand
         {
-            Name = name
+            Name = tagDto.Name
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -58,13 +58,13 @@ public class TagController(ISender sender, ITagQueries tagQueries) : ControllerB
     [HttpPut("UpdateTag/{tagId:guid}")]
     public async Task<ActionResult<TagDto>> UpdateTag(
         [FromRoute] Guid tagId,
-        [FromBody] string name,
+        [FromBody] CreateTagDto tagDto,
         CancellationToken cancellationToken)
     {
         var input = new UpdateTagCommand
         {
             Id = tagId,
-            Name = name
+            Name = tagDto.Name
         };
 
         var result = await sender.Send(input, cancellationToken);
