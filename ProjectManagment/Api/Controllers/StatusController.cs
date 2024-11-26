@@ -36,11 +36,11 @@ public class StatusController(ISender sender, IStatusQueries statusQueries) : Co
 
     [Authorize(Roles = "Admin")]
     [HttpPost("Create")]
-    public async Task<ActionResult<StatusDto>> Create([FromBody] string name, CancellationToken cancellationToken)
+    public async Task<ActionResult<StatusDto>> Create([FromBody] CreateStatusDto statusDto, CancellationToken cancellationToken)
     {
         var input = new CreateStatusCommand
         {
-            Name = name
+            Name = statusDto.Name
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -54,13 +54,13 @@ public class StatusController(ISender sender, IStatusQueries statusQueries) : Co
     [HttpPut("Update/{statusId:guid}")]
     public async Task<ActionResult<StatusDto>> Update(
         [FromRoute] Guid statusId,
-        [FromBody] string updateName,
+        [FromBody] CreateStatusDto statusDto,
         CancellationToken cancellationToken)
     {
         var input = new UpdateStatusCommand
         {
             StatusId = statusId,
-            StatusName = updateName
+            StatusName = statusDto.Name
         };
 
         var result = await sender.Send(input, cancellationToken);

@@ -23,7 +23,7 @@ public class UpdateStatusCommandHandler(IStatusRepository repository)
         return await exsitingStatus.Match(
             async s => await UpdateEntity(s, request.StatusName, cancellationToken),
             () => Task.FromResult<Result<ProjectStatus, StatusException>>(
-                new StatusAlreadyExistsException(new ProjectStatusId(request.StatusId))));
+                new StatusNotFoundException(new ProjectStatusId(request.StatusId))));
     }
 
     private async Task<Result<ProjectStatus, StatusException>> UpdateEntity(
