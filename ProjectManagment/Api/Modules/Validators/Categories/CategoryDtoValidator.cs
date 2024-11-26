@@ -9,7 +9,7 @@ public class CategoryDtoValidator : AbstractValidator<CreateCategoryDto>
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required")
-            .MinimumLength(3).WithMessage("Name should be at least 3 characters.")
-            .MaximumLength(50).WithMessage("Name is too long");
+            .MinimumLength(3).WithMessage("Name is too short. (min: 3)")
+            .MaximumLength(50).WithMessage("Name is too long. (max: 50)");
     }
 }

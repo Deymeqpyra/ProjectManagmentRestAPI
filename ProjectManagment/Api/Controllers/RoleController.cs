@@ -36,11 +36,11 @@ public class RoleController(ISender sender, IRoleQueries roleQueries) : Controll
 
     [Authorize(Roles = "Admin")]
     [HttpPost("AddNewRole")]
-    public async Task<ActionResult<RoleDto>> Create([FromBody] string name, CancellationToken cancellationToken)
+    public async Task<ActionResult<RoleDto>> Create([FromBody] CreateRoleDto createRoleDto, CancellationToken cancellationToken)
     {
         var input = new CreateRoleCommand
         {
-            Name = name
+            Name = createRoleDto.Name
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -54,13 +54,13 @@ public class RoleController(ISender sender, IRoleQueries roleQueries) : Controll
     [HttpPut("UpdateRole/{roleId:guid}")]
     public async Task<ActionResult<RoleDto>> Update(
         [FromRoute] Guid roleId,
-        [FromBody] string updateName,
+        [FromBody] CreateRoleDto createRoleDto,
         CancellationToken cancellationToken)
     {
         var input = new UpdateRoleCommand
         {
             roleId = roleId,
-            updateName = updateName
+            updateName = createRoleDto.Name
         };
 
         var result = await sender.Send(input, cancellationToken);

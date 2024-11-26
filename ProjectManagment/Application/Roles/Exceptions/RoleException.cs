@@ -9,10 +9,10 @@ public class RoleException(RoleId roleId, string message, Exception? innerExcept
 }
 
 public class RoleNotFoundException(RoleId roleId)
-    : RoleException(roleId, $"Role with id {roleId} not found");
+    : RoleException(roleId, $"Role with id: {roleId} not found");
 
 public class RoleAlreadyExistsException(RoleId roleId)
-    : RoleException(roleId, $"Role with id {roleId} already exists");
+    : RoleException(roleId, $"Role with id: {roleId} already exists");
 
 public class RoleUnknownException(RoleId roleId, Exception innerException)
-    : RoleException(roleId, $"Role with id {roleId} expect an unknown exception", innerException);
+    : RoleException(roleId, $"Role with id: {roleId} expect an unknown exception", innerException);

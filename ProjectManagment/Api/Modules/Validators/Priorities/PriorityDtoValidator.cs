@@ -9,7 +9,7 @@ public class PriorityDtoValidator : AbstractValidator<CreatePriorityDto>
     {
         RuleFor(x=>x.title)
             .NotEmpty().WithMessage("Name is required.")
-            .MinimumLength(3).WithMessage("Name at least 3 characters.")
-            .MaximumLength(50).WithMessage("Name is too long.");
+            .MinimumLength(3).WithMessage("Name is too short. (min: 3)")
+            .MaximumLength(50).WithMessage("Name is too long. (max: 50)");
     }
 }
