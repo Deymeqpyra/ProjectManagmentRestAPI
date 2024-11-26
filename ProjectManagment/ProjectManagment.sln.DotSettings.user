@@ -23,9 +23,6 @@
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e7d3ecf9_002Ddaf1_002D4ea8_002Dbe22_002Dcfc68b28d900/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldFailToDeleteCategory_WhenUnauthorized" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.CategoryController.DeleteTest.ShouldFailToDeleteCategory_WhenUnauthorized&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.CategoryController.DeleteTest.ShouldFailToDeleteCategory_WhenCategoryDoesNotExist&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Project Location="E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api.Test.Integration" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;Api.Test.Integration&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Monitoring/StartMode/@EntryValue">Disabled</s:String></wpf:ResourceDictionary>

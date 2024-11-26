@@ -15,17 +15,15 @@ namespace Api.Test.Integration.CategoryController;
 
 public class CreateTest : BaseIntegrationTest, IAsyncLifetime
 {
-    private readonly Category _mainCategory;
     private readonly Role _adminRole;
     private readonly User _adminUser;
 
     public CreateTest(IntegrationTestWebFactory factory) : base(factory)
     {
-        _mainCategory = CategoryData.MainCategory();
         _adminRole = RoleData.AdminRole();
         _adminUser = UserData.AdminUser(_adminRole.Id);
     }
-    
+
 
     [Fact]
     public async Task ShouldCreateCategory()
@@ -157,7 +155,6 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        await Context.Categories.AddRangeAsync(_mainCategory);
         await Context.Roles.AddRangeAsync(_adminRole);
         await Context.Users.AddRangeAsync(_adminUser);
         await SaveChangesAsync();

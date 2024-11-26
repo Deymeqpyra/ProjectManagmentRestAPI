@@ -1,7 +1,7 @@
 using Api.Dtos.CategoriesDto;
 using FluentValidation;
 
-namespace Api.Modules.Validators;
+namespace Api.Modules.Validators.Categories;
 
 public class CategoryDtoValidator : AbstractValidator<CreateCategoryDto>
 {

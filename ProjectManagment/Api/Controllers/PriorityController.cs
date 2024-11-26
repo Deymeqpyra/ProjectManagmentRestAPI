@@ -38,11 +38,11 @@ public class PriorityController(ISender sender, IPriorityQueries priorityQueries
 
     [Authorize(Roles = "Admin")]
     [HttpPost("CreatePriority")]
-    public async Task<ActionResult<PriorityDto>> Create([FromBody] string Name, CancellationToken cancellationToken)
+    public async Task<ActionResult<PriorityDto>> Create([FromBody] CreatePriorityDto priorityDto, CancellationToken cancellationToken)
     {
         var input = new CreatePriorityCommand
         {
-            Name = Name
+            Name = priorityDto.title
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -55,13 +55,13 @@ public class PriorityController(ISender sender, IPriorityQueries priorityQueries
     [HttpPut("UpdatePriority/{priorityId:guid}")]
     public async Task<ActionResult<PriorityDto>> Update(
         [FromRoute] Guid priorityId,
-        [FromBody] string Name,
+        [FromBody] CreatePriorityDto priorityDto,
         CancellationToken cancellationToken)
     {
         var input = new UpdatePriorityCommand
         {
             PriorityId = priorityId,
-            UpdateName = Name
+            UpdateName = priorityDto.title
         };
 
         var result = await sender.Send(input, cancellationToken);
