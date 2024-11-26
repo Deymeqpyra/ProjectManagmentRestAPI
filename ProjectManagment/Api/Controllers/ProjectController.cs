@@ -182,7 +182,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     }
 
     [Authorize(Roles = "Admin, User")]
-    [HttpDelete("delete/{projectId:guid}")]
+    [HttpDelete("deleteProject/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> Delete([FromRoute] Guid projectId, CancellationToken cancellationToken)
     {
         string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
