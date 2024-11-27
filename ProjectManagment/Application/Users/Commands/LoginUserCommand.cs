@@ -4,6 +4,7 @@ using System.Text;
 using Application.Common;
 using Application.Common.Interfaces.Repositories;
 using Application.Users.Exceptions;
+using DevOne.Security.Cryptography.BCrypt;
 using Domain.Users;
 using MediatR;
 using Microsoft.IdentityModel.Tokens;
@@ -22,10 +23,18 @@ public class LoginUserCommandHandler(IUserRepository repository)
     public async Task<Result<string, UserException>> Handle(LoginUserCommand request,
         CancellationToken cancellationToken)
     {
-        var user = await repository.GetByEmailAndPassword(request.Email, request.PassWord, cancellationToken);
+        var user = await repository.GetByEmail(request.Email, cancellationToken);
 
         return await user.Match(
-             u =>  GenerateToken(u),
+             async u =>
+            {
+                if (BCryptHelper.CheckPassword(request.PassWord, u.Password))
+                {
+                   return await GenerateToken(u);
+                }
+
+                return await Task.FromResult<Result<string, UserException>>(new WrongCrenditals(UserId.Empty()));
+            },
             () => Task.FromResult<Result<string, UserException>>(new WrongCrenditals(UserId.Empty())));
     }
 

@@ -41,17 +41,17 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("19b32952-5213-4d09-b266-9e397ed255b6"),
+                            Id = new Guid("260f5527-35cc-40b3-b6ff-554cadd22f9f"),
                             Name = "Development"
                         },
                         new
                         {
-                            Id = new Guid("5601baac-28b7-46bb-961c-0adcff6031c4"),
+                            Id = new Guid("f2fb0bf5-4d50-4451-a97e-d30c79e1e8bd"),
                             Name = "Documentary"
                         },
                         new
                         {
-                            Id = new Guid("c8bcf643-34d5-4daa-940d-ce504ffed554"),
+                            Id = new Guid("0dda3937-9365-4191-ab6f-19419ad76aae"),
                             Name = "Learning"
                         });
                 });
@@ -113,22 +113,22 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c6c1670d-cb51-49a5-9392-70e93eb24fd4"),
+                            Id = new Guid("4ab5d04b-3825-46cb-be02-3d56a69867f3"),
                             Name = "Very Low"
                         },
                         new
                         {
-                            Id = new Guid("c9a5e8df-8171-492d-86de-e88368f0480f"),
+                            Id = new Guid("1b077375-f3a3-4ce2-b224-cc8c903e50c6"),
                             Name = "Medium"
                         },
                         new
                         {
-                            Id = new Guid("facf389d-c7a0-4902-847d-72aac04b73e5"),
+                            Id = new Guid("1d02df9b-c15d-4b40-b027-8fb83ce1c128"),
                             Name = "High"
                         },
                         new
                         {
-                            Id = new Guid("0c4d463d-1f50-42ae-bae6-b4a2c010e984"),
+                            Id = new Guid("c2852904-ee21-4fda-930f-43bd583ff4ab"),
                             Name = "Very High"
                         });
                 });
@@ -228,12 +228,12 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4ea37203-d0fd-429b-b4bf-37558527d306"),
+                            Id = new Guid("0392369f-874b-4689-8e3b-7521d2a5074a"),
                             Name = "User"
                         },
                         new
                         {
-                            Id = new Guid("79ab8d1e-7bdd-4360-9275-2174e13a3b3c"),
+                            Id = new Guid("7c9fb46e-1580-427c-ac38-b4fbc2d81793"),
                             Name = "Admin"
                         });
                 });
@@ -257,17 +257,17 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7328c628-b4a6-48d3-ba25-d906f3a045c8"),
+                            Id = new Guid("c53e2b83-be37-4df4-bc6e-0b5661ac9c35"),
                             Name = "Started"
                         },
                         new
                         {
-                            Id = new Guid("ac7e5106-ad52-42e3-9b7c-d2996d7bbdce"),
+                            Id = new Guid("2d9728a1-ed70-4839-9e37-62659d4657ed"),
                             Name = "In progress"
                         },
                         new
                         {
-                            Id = new Guid("7e6ecfdd-d43a-4ebf-945f-e22b58a04a5d"),
+                            Id = new Guid("e2ca6df9-c001-4dc0-92e8-956853a87095"),
                             Name = "Finished"
                         });
                 });
@@ -291,47 +291,47 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7d16c256-bff5-48f9-90b1-5cfb9b1707d0"),
+                            Id = new Guid("2657c14d-593b-4be0-aead-da191e38b379"),
                             Name = "school"
                         },
                         new
                         {
-                            Id = new Guid("722c0bb6-4629-4e16-98ae-b9c72128a671"),
+                            Id = new Guid("5c488cbf-cf4c-4fd9-b6b7-626a3f9a4ca1"),
                             Name = "dotnet"
                         },
                         new
                         {
-                            Id = new Guid("0c438a3a-3627-4426-b666-f5bfb50454b9"),
+                            Id = new Guid("b9ac75f0-d282-4c25-a4a3-edb489c64a2c"),
                             Name = "work"
                         },
                         new
                         {
-                            Id = new Guid("f9ccd01b-3523-4586-8f2b-eb982bbecd51"),
+                            Id = new Guid("98eb0756-17eb-419b-837f-6601af1accc1"),
                             Name = "petproject"
                         },
                         new
                         {
-                            Id = new Guid("5db3e9e2-51fd-4c1e-82e4-e9ebe350fe75"),
+                            Id = new Guid("7754984f-42c7-4857-aaa0-458140482e16"),
                             Name = "coding"
                         },
                         new
                         {
-                            Id = new Guid("863de1f4-c2b5-44ac-bff4-7ea0c23de679"),
+                            Id = new Guid("e63264ef-d491-47f3-ade3-842f9a49cd8b"),
                             Name = "python"
                         },
                         new
                         {
-                            Id = new Guid("997aa338-c159-474b-8e39-00a9e501411c"),
+                            Id = new Guid("a555194d-fede-4ae5-a490-80466dc3445f"),
                             Name = "university"
                         },
                         new
                         {
-                            Id = new Guid("5e79485c-4f8e-4ebb-a72b-bbdd801c5bc2"),
+                            Id = new Guid("118d6601-b720-4316-8e11-8946c6be7aa6"),
                             Name = "database"
                         },
                         new
                         {
-                            Id = new Guid("db9a7faf-628a-4bf4-a16d-adc572fee68c"),
+                            Id = new Guid("04252352-9d7b-4099-8efc-8da1c3bceff3"),
                             Name = "datastructure"
                         });
                 });
@@ -453,18 +453,18 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4c1ec16d-8d20-4e13-a0c5-b87f0e9e61e2"),
+                            Id = new Guid("103145f9-0cab-413c-9135-0223c0b48dfc"),
                             Email = "user@gmail.com",
-                            Password = "userPass",
-                            RoleId = new Guid("4ea37203-d0fd-429b-b4bf-37558527d306"),
+                            Password = "$2a$10$j2yMWD8agYpX9DeDn1aG/OkqKjRF4sNhvTo9p10NkReFyv6P.OEiq",
+                            RoleId = new Guid("0392369f-874b-4689-8e3b-7521d2a5074a"),
                             UserName = "user"
                         },
                         new
                         {
-                            Id = new Guid("9c499dc9-35c4-4702-aab8-a049e62398a9"),
+                            Id = new Guid("ab0d5cce-7815-440d-a89e-1aeb73e9af00"),
                             Email = "admin@gmail.com",
-                            Password = "adminPass",
-                            RoleId = new Guid("79ab8d1e-7bdd-4360-9275-2174e13a3b3c"),
+                            Password = "$2a$10$6jiVstkgQ2dmsepl9.8n3.eU68scTE2BMFWWpABOk2/u2sSSFdOxO",
+                            RoleId = new Guid("7c9fb46e-1580-427c-ac38-b4fbc2d81793"),
                             UserName = "admin"
                         });
                 });
