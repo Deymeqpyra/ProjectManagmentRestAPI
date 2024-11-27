@@ -1,8 +1,10 @@
 using System.Security.Claims;
+using Api.Dtos.CommentsDto;
 using Api.Dtos.ProjectDto;
 using Api.Dtos.ProjectsUsersDto;
 using Api.Dtos.TagsProjects;
 using Api.Modules.Errors;
+using Application.Comments.Commands;
 using Application.Common.Interfaces.Queries;
 using Application.Projects.Commands;
 using Application.ProjectsUsers.Commands;
@@ -67,10 +69,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<TagProjectDto>> AddTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new AddTagForProjectCommand
         {
             ProjectId = projectId,
-            TagId = tagId
+            TagId = tagId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -81,22 +86,25 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     }
 
     [Authorize(Roles = "Admin, User")]
-    [HttpPut("addComment/{projectId:guid}")]
-    public async Task<ActionResult<ProjectDto>> AddComment(
+    [HttpPost("addComment/{projectId:guid}")]
+    public async Task<ActionResult<CommentDto>> AddComment(
         [FromRoute] Guid projectId,
-        [FromBody] string comment,
+        [FromBody] CreateCommentDto comment,
         CancellationToken cancellationToken)
     {
-        var input = new AddComentToProjectCommand()
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
+        var input = new AddComentToProjectCommand
         {
             ProjectId = projectId,
-            CommentMessage = comment
+            CommentMessage = comment.text,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
 
-        return result.Match<ActionResult<ProjectDto>>(
-            p => ProjectDto.FromProject(p),
+        return result.Match<ActionResult<CommentDto>>(
+            p => CommentDto.FromDomain(p),
             e => e.ToObjectResult());
     }
 

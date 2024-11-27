@@ -49,8 +49,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
             Title: "New Project",
             Description: "Description for the new project",
             statusId: _mainStatus.Id.value,
-            priorityId: _mainPriority.Id.value,
-            comment: null
+            priorityId: _mainPriority.Id.value  
         );
 
         // Act
@@ -77,8 +76,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
             Title: "Unauthorized Project",
             Description: "Unauthorized project description",
             statusId: _mainStatus.Id.value,
-            priorityId: _mainPriority.Id.value,
-            comment: new List<string> { "Unauthorized attempt" }
+            priorityId: _mainPriority.Id.value
         );
 
         // Act
@@ -100,8 +98,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
             Title: "", 
             Description: "Description for the project without title",
             statusId: _mainStatus.Id.value,
-            priorityId: _mainPriority.Id.value,
-            comment: new List<string> { "Comment without title" }
+            priorityId: _mainPriority.Id.value
         );
 
         // Act
@@ -124,8 +121,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
             Title: "Project with Invalid Status",
             Description: "Description with invalid status",
             statusId: invalidStatusId.value,
-            priorityId: _mainPriority.Id.value,
-            comment: new List<string> { "Comment for invalid status" }
+            priorityId: _mainPriority.Id.value
         );
 
         // Act
@@ -148,8 +144,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
             Title: "Project with Invalid Priority",
             Description: "Description with invalid priority",
             statusId: _mainStatus.Id.value,
-            priorityId: invalidPriorityId.value,
-            comment: new List<string> { "Comment for invalid priority" }
+            priorityId: invalidPriorityId.value
         );
 
         // Act

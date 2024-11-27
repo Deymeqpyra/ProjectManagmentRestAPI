@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -75,6 +74,21 @@ namespace Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "comments",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    content = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    project_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    posted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc',now())")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_comments", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "project_tasks",
                 columns: table => new
                 {
@@ -135,8 +149,7 @@ namespace Infrastructure.Persistence.Migrations
                     last_update = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "timezone('utc',now())"),
                     project_status_id = table.Column<Guid>(type: "uuid", nullable: false),
                     project_priority_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    comments = table.Column<List<string>>(type: "text[]", nullable: false)
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,9 +229,9 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
-                    { new Guid("417784d3-6c06-4f5a-9eff-b3016c8d8fc3"), "Learning" },
-                    { new Guid("6b38892a-8a4e-41b3-8cab-a4989674c3e6"), "Development" },
-                    { new Guid("943396cd-3d16-4724-b4a7-d1d06c39ddf4"), "Documentary" }
+                    { new Guid("19b32952-5213-4d09-b266-9e397ed255b6"), "Development" },
+                    { new Guid("5601baac-28b7-46bb-961c-0adcff6031c4"), "Documentary" },
+                    { new Guid("c8bcf643-34d5-4daa-940d-ce504ffed554"), "Learning" }
                 });
 
             migrationBuilder.InsertData(
@@ -226,10 +239,10 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
-                    { new Guid("63774e52-ef50-4802-b6d7-d3ce3c5311f7"), "Very High" },
-                    { new Guid("8919cf39-66e6-4306-ad87-2b181d66b664"), "Medium" },
-                    { new Guid("986fc39c-c9b3-4270-bb45-1fdb130f5864"), "Very Low" },
-                    { new Guid("98800eea-7933-4c0c-a3b5-76c1ef38b920"), "High" }
+                    { new Guid("0c4d463d-1f50-42ae-bae6-b4a2c010e984"), "Very High" },
+                    { new Guid("c6c1670d-cb51-49a5-9392-70e93eb24fd4"), "Very Low" },
+                    { new Guid("c9a5e8df-8171-492d-86de-e88368f0480f"), "Medium" },
+                    { new Guid("facf389d-c7a0-4902-847d-72aac04b73e5"), "High" }
                 });
 
             migrationBuilder.InsertData(
@@ -237,9 +250,9 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
-                    { new Guid("1996468e-8fd2-4a4d-a215-30ef20f2bc80"), "Started" },
-                    { new Guid("3a91d30c-5e7d-41ae-b83b-8af0801b7949"), "In progress" },
-                    { new Guid("66fb2c6e-5275-4ddc-81aa-054b4fcf407e"), "Finished" }
+                    { new Guid("7328c628-b4a6-48d3-ba25-d906f3a045c8"), "Started" },
+                    { new Guid("7e6ecfdd-d43a-4ebf-945f-e22b58a04a5d"), "Finished" },
+                    { new Guid("ac7e5106-ad52-42e3-9b7c-d2996d7bbdce"), "In progress" }
                 });
 
             migrationBuilder.InsertData(
@@ -247,8 +260,8 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
-                    { new Guid("34ccae05-c1ef-42dd-9af4-8d90eb11077d"), "Admin" },
-                    { new Guid("e04f9f16-5eef-41ac-9932-cf0fb98ba32b"), "User" }
+                    { new Guid("4ea37203-d0fd-429b-b4bf-37558527d306"), "User" },
+                    { new Guid("79ab8d1e-7bdd-4360-9275-2174e13a3b3c"), "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -256,15 +269,15 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
-                    { new Guid("560b6eee-8be5-4237-a8bb-83d28e6faf87"), "database" },
-                    { new Guid("5697a060-1e86-4d0b-8230-a25f71fdb133"), "coding" },
-                    { new Guid("57005c27-fd12-46b2-9fb6-f52f41c16d1e"), "datastructure" },
-                    { new Guid("66399fce-b89c-43a5-ae98-403a2f5fb25d"), "work" },
-                    { new Guid("9593da40-b7a1-4475-9b63-b92d213ff2dd"), "petproject" },
-                    { new Guid("96025c70-8dde-47ec-b3fd-01deaa4b076c"), "school" },
-                    { new Guid("a78af071-ed0d-479a-8266-1f46c1f49a96"), "university" },
-                    { new Guid("a81f79c8-1565-4329-84ca-07a9113b4983"), "dotnet" },
-                    { new Guid("b2a32365-fb3a-4902-8684-92020201f2bf"), "python" }
+                    { new Guid("0c438a3a-3627-4426-b666-f5bfb50454b9"), "work" },
+                    { new Guid("5db3e9e2-51fd-4c1e-82e4-e9ebe350fe75"), "coding" },
+                    { new Guid("5e79485c-4f8e-4ebb-a72b-bbdd801c5bc2"), "database" },
+                    { new Guid("722c0bb6-4629-4e16-98ae-b9c72128a671"), "dotnet" },
+                    { new Guid("7d16c256-bff5-48f9-90b1-5cfb9b1707d0"), "school" },
+                    { new Guid("863de1f4-c2b5-44ac-bff4-7ea0c23de679"), "python" },
+                    { new Guid("997aa338-c159-474b-8e39-00a9e501411c"), "university" },
+                    { new Guid("db9a7faf-628a-4bf4-a16d-adc572fee68c"), "datastructure" },
+                    { new Guid("f9ccd01b-3523-4586-8f2b-eb982bbecd51"), "petproject" }
                 });
 
             migrationBuilder.InsertData(
@@ -272,9 +285,19 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "id", "email", "password", "project_task_id", "role_id", "user_name" },
                 values: new object[,]
                 {
-                    { new Guid("0b409bea-3c25-4ecc-ae2f-4d3aa857b429"), "admin@gmail.com", "AdminPass", null, new Guid("34ccae05-c1ef-42dd-9af4-8d90eb11077d"), "Admin" },
-                    { new Guid("15e4c5cc-e48b-4bc4-97ca-5b23a6e7e5b8"), "user@gmail.com", "UserPass", null, new Guid("e04f9f16-5eef-41ac-9932-cf0fb98ba32b"), "User" }
+                    { new Guid("4c1ec16d-8d20-4e13-a0c5-b87f0e9e61e2"), "user@gmail.com", "userPass", null, new Guid("4ea37203-d0fd-429b-b4bf-37558527d306"), "user" },
+                    { new Guid("9c499dc9-35c4-4702-aab8-a049e62398a9"), "admin@gmail.com", "adminPass", null, new Guid("79ab8d1e-7bdd-4360-9275-2174e13a3b3c"), "admin" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_comments_project_id",
+                table: "comments",
+                column: "project_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_comments_user_id",
+                table: "comments",
+                column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_project_tasks_category_id",
@@ -337,6 +360,22 @@ namespace Infrastructure.Persistence.Migrations
                 column: "role_id");
 
             migrationBuilder.AddForeignKey(
+                name: "fk_project_comments",
+                table: "comments",
+                column: "project_id",
+                principalTable: "projects",
+                principalColumn: "project_id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_user_comments",
+                table: "comments",
+                column: "user_id",
+                principalTable: "users",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "fk_project_task_project_id",
                 table: "project_tasks",
                 column: "project_id",
@@ -357,16 +396,15 @@ namespace Infrastructure.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "fk_project_task_category_id",
-                table: "project_tasks");
-
-            migrationBuilder.DropForeignKey(
                 name: "fk_project_task_project_id",
                 table: "project_tasks");
 
             migrationBuilder.DropForeignKey(
                 name: "fk_project_user_id",
                 table: "project_tasks");
+
+            migrationBuilder.DropTable(
+                name: "comments");
 
             migrationBuilder.DropTable(
                 name: "project_users");
@@ -376,9 +414,6 @@ namespace Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "tags");
-
-            migrationBuilder.DropTable(
-                name: "categories");
 
             migrationBuilder.DropTable(
                 name: "projects");
@@ -397,6 +432,9 @@ namespace Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "roles");
+
+            migrationBuilder.DropTable(
+                name: "categories");
         }
     }
 }

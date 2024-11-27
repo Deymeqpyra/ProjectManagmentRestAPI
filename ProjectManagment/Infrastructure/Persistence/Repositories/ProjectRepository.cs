@@ -18,6 +18,8 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
                     .ThenInclude(x=>x.ProjectTask)
             .Include(x => x.ProjectPriority)
             .Include(x => x.ProjectStatus)
+            .Include(x=>x.Comments)
+                .ThenInclude(x=>x.User)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
@@ -25,9 +27,11 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
     public async Task<Option<Project>> GetByIdWithStatusAndPriority(ProjectId id, CancellationToken cancellationToken)
     {
         var entity = await context.Projects
-            .AsNoTracking()
             .Include(x => x.ProjectPriority)
             .Include(x => x.ProjectStatus)
+            .Include(x => x.Comments)
+                .ThenInclude(x=>x.User)
+            .AsNoTracking()
             .FirstOrDefaultAsync(x=>x.ProjectId == id, cancellationToken);
         
         return entity == null ? Option.None<Project>() : Option.Some(entity);

@@ -1,3 +1,4 @@
+using Domain.Comments;
 using Domain.Priorities;
 using Domain.ProjectUsers;
 using Domain.Statuses;
@@ -24,7 +25,7 @@ public class Project
     
     public UserId UserId { get; private set; }
     public User? User { get;  }
-    public List<string> Comments { get; private set; } = [];
+    public ICollection<Comment> Comments { get; private set; } = [];
 
     private Project(
         ProjectId projectId,
@@ -61,12 +62,6 @@ public class Project
     {
         Title = updateTitle;
         Description = updateDescription;
-        LastUpdate = DateTime.UtcNow;
-    }
-
-    public void AddComment(string comment)
-    {
-        Comments.Add(comment);
         LastUpdate = DateTime.UtcNow;
     }
 

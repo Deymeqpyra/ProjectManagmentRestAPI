@@ -42,8 +42,8 @@ public static class DataSeed
         
         builder.Entity<User>()
             .HasData(
-                User.RegisterNewUser(UserId.New(),  "<user-username>", "<user-pass>", "<user-e-mail>",  userRole),
-                User.RegisterNewUser(UserId.New(),  "<admin-username>", "<admin-pass>", "<admin-e-mail>",  adminRole)
+                User.RegisterNewUser(UserId.New(),  "user", "userPass", "user@gmail.com",  userRole),
+                User.RegisterNewUser(UserId.New(),  "admin", "adminPass", "admin@gmail.com",  adminRole)
             );
 
         builder.Entity<Tag>().HasData(

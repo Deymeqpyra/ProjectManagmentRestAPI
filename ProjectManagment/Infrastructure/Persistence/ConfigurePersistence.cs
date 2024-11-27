@@ -35,6 +35,10 @@ public static class ConfigurePersistence
         services.AddScoped<IUserRepository>(provider => provider.GetRequiredService<UserRepository>());
         services.AddScoped<IUserQueries>(provider => provider.GetRequiredService<UserRepository>());
         
+        services.AddScoped<CommentRepository>();
+        services.AddScoped<ICommentRepository>(provider => provider.GetRequiredService<CommentRepository>());
+        services.AddScoped<ICommentQueries>(provider => provider.GetRequiredService<CommentRepository>());
+        
         services.AddScoped<ProjectRepository>();
         services.AddScoped<IProjectRepository>(provider => provider.GetRequiredService<ProjectRepository>());
         services.AddScoped<IProjectQueries>(provider => provider.GetRequiredService<ProjectRepository>());

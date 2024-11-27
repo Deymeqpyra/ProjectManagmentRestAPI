@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Application.Projects.Commands;
+namespace Application.Comments.Commands;
 
 public class AddComentToProjectCommandValidator : AbstractValidator<AddComentToProjectCommand>
 {

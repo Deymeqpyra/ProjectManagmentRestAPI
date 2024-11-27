@@ -46,6 +46,5 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
             .HasConstraintName("fk_project_user_id")
             .OnDelete(DeleteBehavior.Restrict);
         
-        builder.Property(x=>x.Comments);
     }
 }
