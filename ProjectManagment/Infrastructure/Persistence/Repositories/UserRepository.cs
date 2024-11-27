@@ -40,6 +40,9 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository, IUs
     public async Task<Option<User>> GetByEmail(string email, CancellationToken cancellationToken)
     {
         var entity = await context.Users
+            .Include(x=>x.Role)
+            .Include(x=>x.ProjectUsers)
+                .ThenInclude(x=>x.Project)
             .AsNoTracking()
             .FirstOrDefaultAsync(x=>x.Email == email, cancellationToken);
         

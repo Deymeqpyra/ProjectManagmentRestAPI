@@ -153,11 +153,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
     {
-        
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new DeleteTagFromProjectCommand
         {
             ProjectId = projectId,
-            TagId = tagId
+            TagId = tagId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
