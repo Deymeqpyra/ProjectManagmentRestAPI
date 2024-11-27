@@ -1,6 +1,7 @@
 using Application.Projects.Exceptions;
 using Domain.Projects;
 using Domain.Tags;
+using Domain.Users;
 
 namespace Application.TagsProjects.Exceptions;
 
@@ -17,6 +18,11 @@ public class ProjectNotFoundException(ProjectId projectId)
 public class TagProjectAlreadyExsist(ProjectId projectId, TagId tagId)
     : TagProjectException(projectId, tagId, $"Project {projectId} already have tag {tagId}");
 
+public class UserNotEnoughPremission(ProjectId projectId, UserId userId)
+    : TagProjectException(projectId, null, $"User {userId} not enough permissions for {projectId}");
+
+public class UserNotFound(ProjectId projectId, UserId userId)
+    : TagProjectException(projectId, null, $"User with id: {userId} does not exist");
 public class TagNotFoundException(TagId tagId)
     : TagProjectException(null, tagId, $"Tag {tagId} not found");
 
