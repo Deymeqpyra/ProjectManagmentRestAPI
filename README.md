@@ -47,7 +47,8 @@ The **Project Collaboration Tool** is a powerful project management and collabor
   - **React**  
     Interactive and real-time user interface with state management.
 - **Database**:  
-  - **Entity Framework Core**  
+  - **Entity Framework Core**
+  - **PostgreSQL**
     Relational database schema with comprehensive seed data.
 
 ---
