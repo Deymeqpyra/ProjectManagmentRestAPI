@@ -11,6 +11,7 @@ namespace Application.ProjectsUsers.Commands;
 public class AddUserToProjectCommand : IRequest<Result<ProjectUser, ProjectUserException>>
 {
     public required Guid ProjectId { get; init; }
+    public required Guid UserIdWhoCreated { get; init; }
     public required Guid UserId { get; init; }
 }
 
@@ -25,6 +26,7 @@ public class AddUserToProjectCommandHandler(
     {
         var projectId = new ProjectId(request.ProjectId);
         var userId = new UserId(request.UserId);
+        var userIdWhoCreated = new UserId(request.UserIdWhoCreated);
 
         var exstingProjectUser = await repository.GetByIds(projectId, userId, cancellationToken);
 
@@ -37,9 +39,25 @@ public class AddUserToProjectCommandHandler(
                 return await exsitingProject.Match(
                     async p =>
                     {
-                        var exsitingUser = await userRepository.GetById(userId, cancellationToken);
-                        return await exsitingUser.Match(
-                            async u => await AddAsync(p.ProjectId, u.Id, cancellationToken),
+                        var exsitingUserWhoCreate = await userRepository.GetById(userIdWhoCreated, cancellationToken);
+                        return await exsitingUserWhoCreate.Match(
+                            async exu =>
+                            {
+                                var exsitingUser = await userRepository.GetById(userId, cancellationToken);
+                                return await exsitingUser.Match(
+                                    async u =>
+                                    {
+                                        if (p.UserId != exu.Id || exu.Role!.Name != "Admin")
+                                        {
+                                            return await Task.FromResult<Result<ProjectUser, ProjectUserException>>(
+                                                new UserNotEnoughPremission(projectId, userIdWhoCreated));
+                                        }
+
+                                        return await AddAsync(p.ProjectId, u.Id, cancellationToken);
+                                    },
+                                    () => Task.FromResult<Result<ProjectUser, ProjectUserException>>(
+                                        new UserNotFound(projectId, userId)));
+                            },
                             () => Task.FromResult<Result<ProjectUser, ProjectUserException>>(
                                 new UserNotFound(projectId, userId)));
                     },

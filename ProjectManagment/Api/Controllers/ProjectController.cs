@@ -10,6 +10,7 @@ using Application.Projects.Commands;
 using Application.ProjectsUsers.Commands;
 using Application.TagsProjects.Commands;
 using Domain.Projects;
+using Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace Api.Controllers;
 [Authorize]
 public class ProjectController(ISender sender, IProjectQueries projectQueries) : ControllerBase
 {
-    [Authorize(Roles = "Admin, User")]
+    [Authorize(Roles = "Admin")]
     [HttpGet("getAll")]
     public async Task<ActionResult<IReadOnlyList<ProjectDto>>> GetProjects(CancellationToken cancellationToken)
     {
@@ -29,8 +30,18 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
 
         return entities.Select(ProjectDto.FromProject).ToList();
     }
+    [Authorize(Roles = "Admin, User")]
+    [HttpGet("getAllByUser")]
+    public async Task<ActionResult<IReadOnlyList<ProjectDto>>> GetProjectsByUserId(CancellationToken cancellationToken)
+    {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
+        var entities = await projectQueries.GetByUserId(new UserId(userId), cancellationToken);
 
+        return entities.Select(ProjectDto.FromProject).ToList();
+    }
 
+    [Authorize(Roles="Admin, User")]
     [HttpGet("getById/{projectId:guid}")]
     public async Task<ActionResult<ProjectDto>> GetProjectById(Guid projectId, CancellationToken cancellationToken)
     {
@@ -115,10 +126,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
         [FromRoute] Guid userId,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userIdWhoCreated = Guid.Parse(userIdClaim);
         var input = new AddUserToProjectCommand
         {
             ProjectId = projectId,
-            UserId = userId
+            UserId = userId,
+            UserIdWhoCreated = userIdWhoCreated
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -135,10 +149,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
         [FromRoute] Guid userId,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userIdWhoCreated = Guid.Parse(userIdClaim);
         var input = new DeleteUserFromProjectCommand
         {
             ProjectId = projectId,
-            UserId = userId
+            UserId = userId,
+            UserIdWhoCreated = userIdWhoCreated
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -153,11 +170,13 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
     {
-        
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
         var input = new DeleteTagFromProjectCommand
         {
             ProjectId = projectId,
-            TagId = tagId
+            TagId = tagId,
+            UserId = userId
         };
 
         var result = await sender.Send(input, cancellationToken);
@@ -199,7 +218,6 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
         {
             ProjectId = projectId,
             UserId = userId
-            
         };
 
         var result = await sender.Send(input, cancellationToken);

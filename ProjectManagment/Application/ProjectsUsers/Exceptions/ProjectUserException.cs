@@ -20,6 +20,8 @@ public class ProjectNotFound(ProjectId projectId, UserId userId)
 public class UserNotFound(ProjectId projectId, UserId userId)
     : ProjectUserException(projectId, userId, $"User {userId} not found, while tried to add to project {projectId}");
 
+public class UserNotEnoughPremission(ProjectId projectId, UserId userId)
+    : ProjectUserException(projectId, userId, "User not enough permissions");
 public class UserAlreadyInProject(ProjectId projectId, UserId userId)
     : ProjectUserException(projectId, userId, $"User {userId} already in project");
 
