@@ -18,8 +18,10 @@ public class AddComentToProjectCommand : IRequest<Result<Comment, CommentExcepti
     public required string CommentMessage { get; init; }
 }
 
-public class AddCommentToProjectCommandHandler(IProjectRepository repository,
-    IUserRepository userRepository, ICommentRepository commentRepository)
+public class AddCommentToProjectCommandHandler(
+    IProjectRepository repository,
+    IUserRepository userRepository,
+    ICommentRepository commentRepository)
     : IRequestHandler<AddComentToProjectCommand, Result<Comment, CommentException>>
 {
     public async Task<Result<Comment, CommentException>> Handle(AddComentToProjectCommand request,
@@ -35,21 +37,27 @@ public class AddCommentToProjectCommandHandler(IProjectRepository repository,
             async u =>
             {
                 return await existingProject.Match(
-                    async p => { return await CreateComment(CommentId.New(),p.ProjectId, u.Id,request.CommentMessage, cancellationToken); },
-                    () => Task.FromResult<Result<Comment, CommentException>>(new ProjectNotFound(projectId, CommentId.Empty())));
+                    async p =>
+                    {
+                        return await CreateComment(CommentId.New(), p.ProjectId, u.Id, request.CommentMessage,
+                            cancellationToken);
+                    },
+                    () => Task.FromResult<Result<Comment, CommentException>>(new ProjectNotFound(projectId,
+                        CommentId.Empty())));
             },
             () => Task.FromResult<Result<Comment, CommentException>>(new UserNotFound(userId, CommentId.Empty()))
         );
     }
 
-    private async Task<Result<Comment, CommentException>> CreateComment(CommentId commentId,ProjectId projectId, UserId userId,
+    private async Task<Result<Comment, CommentException>> CreateComment(CommentId commentId, ProjectId projectId,
+        UserId userId,
         string comment, CancellationToken cancellationToken)
     {
         try
         {
             var commentEntity = Comment.PostComment(commentId, comment, userId, projectId, DateTime.UtcNow);
-            
-            return await commentRepository.Create(commentEntity, cancellationToken); 
+
+            return await commentRepository.Create(commentEntity, cancellationToken);
         }
         catch (Exception e)
         {

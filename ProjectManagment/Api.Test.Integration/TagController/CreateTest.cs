@@ -30,7 +30,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldCreateTag()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string tagName = "NewTag";
         var request = new CreateTagDto(Name: tagName);
@@ -69,7 +69,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateTag_WhenNameIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var request = new CreateTagDto(Name: string.Empty);
 
@@ -88,7 +88,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateTag_WhenNameAlreadyExists()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var request = new CreateTagDto(Name: _mainTag.Name);
 

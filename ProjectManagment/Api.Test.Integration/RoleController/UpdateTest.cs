@@ -29,7 +29,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldUpdateRole()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string updatedName = "Updated Role Name";
         var request = new CreateRoleDto(Name: updatedName);
@@ -64,7 +64,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdateRole_WhenNameIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var request = new CreateRoleDto(Name: string.Empty);
 
@@ -83,7 +83,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdateRole_WhenNameIsTooLong()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var longName = new string('a', 101);
         var request = new CreateRoleDto(Name: longName);
@@ -103,7 +103,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdateRole_WhenIdDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var nonExistentRoleId = RoleId.New();
         var request = new CreateRoleDto(Name: "Non-existent Role");

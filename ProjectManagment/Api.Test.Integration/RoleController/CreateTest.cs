@@ -29,7 +29,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldCreateRole()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string roleName = "Test Role";
         var request = new CreateRoleDto(Name: roleName);
@@ -68,7 +68,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateRole_WhenNameIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var request = new CreateRoleDto(Name: string.Empty);
 
@@ -87,7 +87,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateRole_WhenNameIsTooLong()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var longRoleName = new string('a', 101);
         var request = new CreateRoleDto(Name: longRoleName);
@@ -107,7 +107,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateRole_WhenNameAlreadyExists()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var request = new CreateRoleDto(Name: _testRole.Name);

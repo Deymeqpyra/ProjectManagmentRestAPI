@@ -30,7 +30,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldUpdateStatus()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string updatedStatusName = "Updated Status";
         var request = new CreateStatusDto(Name: updatedStatusName);
@@ -64,7 +64,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdateStatus_WhenStatusDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var nonExistentStatusId = ProjectStatusId.New();

@@ -28,7 +28,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldCreatePriority()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string priorityTitle = "High Priority";
         var request = new CreatePriorityDto(title: priorityTitle);
@@ -67,7 +67,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreatePriority_WhenTitleIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var request = new CreatePriorityDto(title: string.Empty);
 
@@ -86,9 +86,9 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreatePriority_WhenTitleIsTooLong()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-        var longTitle = new string('a', 101); // Assuming a 100-character limit
+        var longTitle = new string('a', 101); 
         var request = new CreatePriorityDto(title: longTitle);
 
         // Act
@@ -106,7 +106,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreatePriority_WhenTitleAlreadyExists()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string duplicateTitle = "Duplicate Priority";
         var existingPriority = ProjectPriority.New(ProjectPriorityId.New(), duplicateTitle);

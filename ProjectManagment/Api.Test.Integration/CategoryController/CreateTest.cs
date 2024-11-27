@@ -29,7 +29,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldCreateCategory()
     {
         //Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string categoryName = "test_category";
         var request = new CreateCategoryDto(Name: categoryName);
@@ -69,7 +69,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateCategory_WhenNameIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var request = new CreateCategoryDto(Name: string.Empty);
 
@@ -88,7 +88,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateCategory_WhenNameIsTooLong()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var longCategoryName = new string('a', 56);
         var request = new CreateCategoryDto(Name: longCategoryName);
@@ -108,7 +108,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateCategory_WhenNameAlreadyExists()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string duplicateCategoryName = "duplicate_category";
         var existingCategory = Category.New(CategoryId.New(), duplicateCategoryName);
@@ -132,7 +132,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldCreateCategory_WhenValidRequest()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         const string categoryName = "valid_category";
         var request = new CreateCategoryDto(Name: categoryName);

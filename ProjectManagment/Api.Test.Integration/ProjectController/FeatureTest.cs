@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
@@ -43,7 +44,7 @@ public class FeatureTest : BaseIntegrationTest, IAsyncLifetime
     public async void ShoudlAddCommentToProject()
     {
         // arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         
         var request = new CreateCommentDto(text:"Test comentary to add a new comment");
@@ -62,6 +63,24 @@ public class FeatureTest : BaseIntegrationTest, IAsyncLifetime
         
         commentFromDb.Should().NotBeNull();
         commentFromDb.Content.Should().Be(request.text);
+    }
+    [Fact]
+    public async void ShouldFailToAddCommentToProject_CauseNotFoundProject()
+    {
+        // arrange
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+        
+        var projectId = ProjectId.New();
+        var request = new CreateCommentDto(text:"Test comentary to add a new comment");
+        
+        // act
+        var response = await Client.PostAsJsonAsync($"projects/addComment/{projectId}", request);
+        
+        
+        // assert
+        response.IsSuccessStatusCode.Should().BeFalse();
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);        
     }
     
     public async Task InitializeAsync()

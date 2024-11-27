@@ -30,7 +30,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldUpdateTag()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var updatedName = "UpdatedTagName";
@@ -64,7 +64,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdateTag_WhenIdDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         var nonExistentRoleId = TagId.New();
         var request = new CreateTagDto(Name: "Non-existent Role");

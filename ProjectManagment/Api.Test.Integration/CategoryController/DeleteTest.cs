@@ -28,7 +28,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async void ShouldDeleteCategory()
     {
         //arrange 
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         
         // act 
@@ -58,7 +58,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async void ShouldFailToDeleteCategory_WhenCategoryDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var nonExistentCategoryId = CategoryId.New(); 

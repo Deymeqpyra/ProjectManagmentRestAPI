@@ -30,7 +30,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async void ShouldCreateTest()
     {
         // arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         const string categoryUpdateName = "UpdateTest";
@@ -70,7 +70,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async void ShouldFailToUpdateCategory_WhenCategoryDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         const string categoryUpdateName = "NonExistentCategoryUpdate";
@@ -89,7 +89,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async void ShouldFailToUpdateCategory_WhenNameIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var request = new CreateCategoryDto(Name: string.Empty);
@@ -109,7 +109,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async void ShouldFailToUpdateCategory_WhenNameIsTooLong()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var longCategoryName = new string('a', 256); // Assuming the max length is 255

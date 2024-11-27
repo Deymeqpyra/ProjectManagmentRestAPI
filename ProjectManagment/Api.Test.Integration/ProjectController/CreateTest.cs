@@ -42,7 +42,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldCreateProjectWithSuccess_WhenValidData()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         
         var request = new CreateProjectDto(
@@ -91,7 +91,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateProject_WhenMissingRequiredFields()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         
         var request = new CreateProjectDto(
@@ -113,7 +113,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateProject_WhenStatusDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         
         var invalidStatusId = ProjectStatusId.New();
@@ -136,7 +136,7 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToCreateProject_WhenPriorityDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         
         var invalidPriorityId = ProjectPriorityId.New(); 

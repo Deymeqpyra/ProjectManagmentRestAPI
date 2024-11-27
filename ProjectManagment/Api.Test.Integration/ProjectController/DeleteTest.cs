@@ -40,7 +40,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldDeleteProjectWithSuccess_WhenAuthorized()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         // Act
@@ -72,7 +72,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToDeleteProject_WhenProjectDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var nonExistentProjectId = ProjectId.New(); 

@@ -28,7 +28,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldDeletePriority()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         // Act
@@ -56,7 +56,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToDeletePriority_WhenPriorityDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var nonExistentId = ProjectPriorityId.New();

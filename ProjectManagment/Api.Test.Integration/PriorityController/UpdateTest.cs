@@ -30,7 +30,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldUpdatePriority()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email,UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var updatedTitle = "Updated Priority";
@@ -67,7 +67,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdatePriority_WhenTitleIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var request = new CreatePriorityDto(string.Empty);
@@ -87,7 +87,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdatePriority_WhenTitleIsTooLong()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var longTitle = new string('a', 101);

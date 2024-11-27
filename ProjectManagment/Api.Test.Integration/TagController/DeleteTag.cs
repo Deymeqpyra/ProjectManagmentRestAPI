@@ -28,7 +28,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldDeleteTag()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         // Act
         var response = await Client.DeleteAsync($"tags/DeleteTag/{_tagToDelete.Id}");
@@ -44,7 +44,7 @@ public class DeleteTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToDeleteTag_WhenTagDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var nonExistentTagId = TagId.New();

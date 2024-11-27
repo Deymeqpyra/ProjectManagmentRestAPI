@@ -42,7 +42,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldUpdateProjectWithSuccess_WhenValidData()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var updateRequest = new UpdateProjectDto(
@@ -83,7 +83,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdateProject_WhenTitleIsEmpty()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var updateRequest = new UpdateProjectDto(
@@ -103,7 +103,7 @@ public class UpdateTest : BaseIntegrationTest, IAsyncLifetime
     public async Task ShouldFailToUpdateProject_WhenProjectDoesNotExist()
     {
         // Arrange
-        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, _adminUser.Password);
+        var authToken = await GenerateAuthTokenAsync(_adminUser.Email, UserData.passwordAdmin);
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
         var nonExistentProjectId = ProjectId.New();
