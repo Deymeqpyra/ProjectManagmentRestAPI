@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241127121136_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +41,23 @@ namespace Infrastructure.Persistence.Migrations
                         .HasName("pk_categories");
 
                     b.ToTable("categories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6b38892a-8a4e-41b3-8cab-a4989674c3e6"),
+                            Name = "Development"
+                        },
+                        new
+                        {
+                            Id = new Guid("943396cd-3d16-4724-b4a7-d1d06c39ddf4"),
+                            Name = "Documentary"
+                        },
+                        new
+                        {
+                            Id = new Guid("417784d3-6c06-4f5a-9eff-b3016c8d8fc3"),
+                            Name = "Learning"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Priorities.ProjectPriority", b =>
@@ -55,6 +75,28 @@ namespace Infrastructure.Persistence.Migrations
                         .HasName("pk_project_priorities");
 
                     b.ToTable("project_priorities", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("986fc39c-c9b3-4270-bb45-1fdb130f5864"),
+                            Name = "Very Low"
+                        },
+                        new
+                        {
+                            Id = new Guid("8919cf39-66e6-4306-ad87-2b181d66b664"),
+                            Name = "Medium"
+                        },
+                        new
+                        {
+                            Id = new Guid("98800eea-7933-4c0c-a3b5-76c1ef38b920"),
+                            Name = "High"
+                        },
+                        new
+                        {
+                            Id = new Guid("63774e52-ef50-4802-b6d7-d3ce3c5311f7"),
+                            Name = "Very High"
+                        });
                 });
 
             modelBuilder.Entity("Domain.ProjectUsers.ProjectUser", b =>
@@ -153,6 +195,18 @@ namespace Infrastructure.Persistence.Migrations
                         .HasName("pk_roles");
 
                     b.ToTable("roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e04f9f16-5eef-41ac-9932-cf0fb98ba32b"),
+                            Name = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("34ccae05-c1ef-42dd-9af4-8d90eb11077d"),
+                            Name = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Statuses.ProjectStatus", b =>
@@ -170,6 +224,23 @@ namespace Infrastructure.Persistence.Migrations
                         .HasName("pk_project_statuses");
 
                     b.ToTable("project_statuses", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1996468e-8fd2-4a4d-a215-30ef20f2bc80"),
+                            Name = "Started"
+                        },
+                        new
+                        {
+                            Id = new Guid("3a91d30c-5e7d-41ae-b83b-8af0801b7949"),
+                            Name = "In progress"
+                        },
+                        new
+                        {
+                            Id = new Guid("66fb2c6e-5275-4ddc-81aa-054b4fcf407e"),
+                            Name = "Finished"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Tags.Tag", b =>
@@ -187,6 +258,53 @@ namespace Infrastructure.Persistence.Migrations
                         .HasName("pk_tags");
 
                     b.ToTable("tags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("96025c70-8dde-47ec-b3fd-01deaa4b076c"),
+                            Name = "school"
+                        },
+                        new
+                        {
+                            Id = new Guid("a81f79c8-1565-4329-84ca-07a9113b4983"),
+                            Name = "dotnet"
+                        },
+                        new
+                        {
+                            Id = new Guid("66399fce-b89c-43a5-ae98-403a2f5fb25d"),
+                            Name = "work"
+                        },
+                        new
+                        {
+                            Id = new Guid("9593da40-b7a1-4475-9b63-b92d213ff2dd"),
+                            Name = "petproject"
+                        },
+                        new
+                        {
+                            Id = new Guid("5697a060-1e86-4d0b-8230-a25f71fdb133"),
+                            Name = "coding"
+                        },
+                        new
+                        {
+                            Id = new Guid("b2a32365-fb3a-4902-8684-92020201f2bf"),
+                            Name = "python"
+                        },
+                        new
+                        {
+                            Id = new Guid("a78af071-ed0d-479a-8266-1f46c1f49a96"),
+                            Name = "university"
+                        },
+                        new
+                        {
+                            Id = new Guid("560b6eee-8be5-4237-a8bb-83d28e6faf87"),
+                            Name = "database"
+                        },
+                        new
+                        {
+                            Id = new Guid("57005c27-fd12-46b2-9fb6-f52f41c16d1e"),
+                            Name = "datastructure"
+                        });
                 });
 
             modelBuilder.Entity("Domain.TagsProjects.TagsProject", b =>
@@ -302,6 +420,24 @@ namespace Infrastructure.Persistence.Migrations
                         .HasDatabaseName("ix_users_role_id");
 
                     b.ToTable("users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("15e4c5cc-e48b-4bc4-97ca-5b23a6e7e5b8"),
+                            Email = "user@gmail.com",
+                            Password = "UserPass",
+                            RoleId = new Guid("e04f9f16-5eef-41ac-9932-cf0fb98ba32b"),
+                            UserName = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("0b409bea-3c25-4ecc-ae2f-4d3aa857b429"),
+                            Email = "admin@gmail.com",
+                            Password = "AdminPass",
+                            RoleId = new Guid("34ccae05-c1ef-42dd-9af4-8d90eb11077d"),
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Domain.ProjectUsers.ProjectUser", b =>

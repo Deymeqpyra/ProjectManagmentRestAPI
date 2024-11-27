@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -207,6 +209,71 @@ namespace Infrastructure.Persistence.Migrations
                         principalTable: "tags",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "categories",
+                columns: new[] { "id", "name" },
+                values: new object[,]
+                {
+                    { new Guid("417784d3-6c06-4f5a-9eff-b3016c8d8fc3"), "Learning" },
+                    { new Guid("6b38892a-8a4e-41b3-8cab-a4989674c3e6"), "Development" },
+                    { new Guid("943396cd-3d16-4724-b4a7-d1d06c39ddf4"), "Documentary" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "project_priorities",
+                columns: new[] { "id", "name" },
+                values: new object[,]
+                {
+                    { new Guid("63774e52-ef50-4802-b6d7-d3ce3c5311f7"), "Very High" },
+                    { new Guid("8919cf39-66e6-4306-ad87-2b181d66b664"), "Medium" },
+                    { new Guid("986fc39c-c9b3-4270-bb45-1fdb130f5864"), "Very Low" },
+                    { new Guid("98800eea-7933-4c0c-a3b5-76c1ef38b920"), "High" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "project_statuses",
+                columns: new[] { "id", "name" },
+                values: new object[,]
+                {
+                    { new Guid("1996468e-8fd2-4a4d-a215-30ef20f2bc80"), "Started" },
+                    { new Guid("3a91d30c-5e7d-41ae-b83b-8af0801b7949"), "In progress" },
+                    { new Guid("66fb2c6e-5275-4ddc-81aa-054b4fcf407e"), "Finished" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "roles",
+                columns: new[] { "id", "name" },
+                values: new object[,]
+                {
+                    { new Guid("34ccae05-c1ef-42dd-9af4-8d90eb11077d"), "Admin" },
+                    { new Guid("e04f9f16-5eef-41ac-9932-cf0fb98ba32b"), "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "tags",
+                columns: new[] { "id", "name" },
+                values: new object[,]
+                {
+                    { new Guid("560b6eee-8be5-4237-a8bb-83d28e6faf87"), "database" },
+                    { new Guid("5697a060-1e86-4d0b-8230-a25f71fdb133"), "coding" },
+                    { new Guid("57005c27-fd12-46b2-9fb6-f52f41c16d1e"), "datastructure" },
+                    { new Guid("66399fce-b89c-43a5-ae98-403a2f5fb25d"), "work" },
+                    { new Guid("9593da40-b7a1-4475-9b63-b92d213ff2dd"), "petproject" },
+                    { new Guid("96025c70-8dde-47ec-b3fd-01deaa4b076c"), "school" },
+                    { new Guid("a78af071-ed0d-479a-8266-1f46c1f49a96"), "university" },
+                    { new Guid("a81f79c8-1565-4329-84ca-07a9113b4983"), "dotnet" },
+                    { new Guid("b2a32365-fb3a-4902-8684-92020201f2bf"), "python" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "users",
+                columns: new[] { "id", "email", "password", "project_task_id", "role_id", "user_name" },
+                values: new object[,]
+                {
+                    { new Guid("0b409bea-3c25-4ecc-ae2f-4d3aa857b429"), "admin@gmail.com", "AdminPass", null, new Guid("34ccae05-c1ef-42dd-9af4-8d90eb11077d"), "Admin" },
+                    { new Guid("15e4c5cc-e48b-4bc4-97ca-5b23a6e7e5b8"), "user@gmail.com", "UserPass", null, new Guid("e04f9f16-5eef-41ac-9932-cf0fb98ba32b"), "User" }
                 });
 
             migrationBuilder.CreateIndex(
