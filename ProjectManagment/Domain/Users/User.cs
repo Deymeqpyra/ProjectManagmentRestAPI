@@ -1,3 +1,4 @@
+using DevOne.Security.Cryptography.BCrypt;
 using Domain.ProjectUsers;
 using Domain.Roles;
 using Domain.Tasks;
@@ -29,11 +30,11 @@ public class User
         RoleId = roleId;
     }
     public static User RegisterNewUser(UserId id, string userName, string password, string email, RoleId roleId)
-    => new(id, userName, password, email, roleId);
+    => new(id, userName, BCryptHelper.HashPassword(password, BCryptHelper.GenerateSalt(10)), email, roleId);
 
     public void UpdatePassword(string password)
     {
-        Password = password;
+        Password = BCryptHelper.HashPassword(password, BCryptHelper.GenerateSalt());
     } 
     public void UpdateEmail(string email)
     {
