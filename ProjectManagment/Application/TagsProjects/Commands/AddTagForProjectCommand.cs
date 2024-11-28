@@ -45,17 +45,17 @@ public class AddTagForProjectHandler(
                         return await exisitingProject.Match(
                             async p =>
                             {
-                                if (p.UserId != userId || u.Role!.Name != "Admin")
+                                if (p.UserId == userId || u.Role!.Name == "Admin")
                                 {
-                                    return await Task.FromResult<Result<TagsProject, TagProjectException>>(
-                                        new UserNotEnoughPremission(projectId, userId));
+                                    var exisitngTag = await tagRepository.GetById(tagId, cancellationToken);
+                                    return await exisitngTag.Match(
+                                        async t => await AddTag(p.ProjectId, t.Id, cancellationToken),
+                                        () => Task.FromResult<Result<TagsProject, TagProjectException>>(
+                                            new TagNotFoundException(tagId)));
                                 }
 
-                                var exisitngTag = await tagRepository.GetById(tagId, cancellationToken);
-                                return await exisitngTag.Match(
-                                    async t => await AddTag(p.ProjectId, t.Id, cancellationToken),
-                                    () => Task.FromResult<Result<TagsProject, TagProjectException>>(
-                                        new TagNotFoundException(tagId)));
+                                return await Task.FromResult<Result<TagsProject, TagProjectException>>(
+                                    new UserNotEnoughPremission(projectId, userId));
                             },
                             () => Task.FromResult<Result<TagsProject, TagProjectException>>(
                                 new ProjectNotFoundException(projectId)));

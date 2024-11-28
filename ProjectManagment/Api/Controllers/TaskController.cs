@@ -37,8 +37,9 @@ public class TaskController(ISender sender, ITaskQueries taskQueries) : Controll
     }
 
     [Authorize(Roles = "Admin, User")]
-    [HttpPost("Create")]
-    public async Task<ActionResult<ProjectTaskDto>> Create([FromBody] CreateTaskDto projectTaskDto,
+    [HttpPost("CreateTask/{projectId:guid}")]
+    public async Task<ActionResult<ProjectTaskDto>> Create([FromRoute] Guid projectId,
+        [FromBody] CreateTaskDto projectTaskDto,
         CancellationToken cancellationToken)
     {
         string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -47,7 +48,7 @@ public class TaskController(ISender sender, ITaskQueries taskQueries) : Controll
         {
             TaskTitle = projectTaskDto.title,
             CategoryId = projectTaskDto.categoryId,
-            ProjectId = projectTaskDto.projectId,
+            ProjectId = projectId,
             ShortDescription = projectTaskDto.description,
             UserId = userId
         };

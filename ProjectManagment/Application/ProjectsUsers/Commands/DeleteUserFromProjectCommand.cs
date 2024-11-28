@@ -38,15 +38,16 @@ public class
                 return await existingUser.Match(
                     async u =>
                     {
-                        if (p.UserId != userIdWhoCreated || u.Role.Name != "Admin")
+                        if (p.UserId == userIdWhoCreated || u.Role!.Name == "Admin")
                         {
-                            return await Task.FromResult<Result<ProjectUser, ProjectUserException>>(
-                                new UserNotEnoughPremission(projectId, userId));
+                            return await exsistingProjectUser.Match(
+                                async pu => await DeleteUser(pu, cancellationToken),
+                                () => Task.FromResult<Result<ProjectUser, ProjectUserException>>(
+                                    new ProjectUserNotFound(projectId, userId)));
                         }
-                        return await exsistingProjectUser.Match(
-                            async pu => await DeleteUser(pu, cancellationToken),
-                            () => Task.FromResult<Result<ProjectUser, ProjectUserException>>(
-                                new ProjectUserNotFound(projectId, userId)));
+                        return await Task.FromResult<Result<ProjectUser, ProjectUserException>>(
+                            new UserNotEnoughPremission(projectId, userId));
+                       
                     },
                     () => Task.FromResult<Result<ProjectUser, ProjectUserException>>(
                         new UserNotFound(projectId, userId)));

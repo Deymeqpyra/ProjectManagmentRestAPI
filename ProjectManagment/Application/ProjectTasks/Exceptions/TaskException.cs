@@ -1,3 +1,4 @@
+using Domain.Categories;
 using Domain.Tasks;
 
 namespace Application.ProjectTasks.Exceptions;
@@ -22,6 +23,10 @@ public class TaskUnknowException(ProjectTaskId taskId, Exception innerException)
 
 public class UserNotFoundWhileCreated(ProjectTaskId taskId)
     : TaskException(taskId, $"User not found");
+public class UserNotEnoughPremission(ProjectTaskId taskId)
+    : TaskException(taskId, $"User not enough permissions");
+public class CategoryNotFound(ProjectTaskId taskId, CategoryId categoryId)
+    : TaskException(taskId, $"Category with id: {categoryId} not found");
     
 public class NotEnoughPermission(ProjectTaskId taskId)
     : TaskException(taskId, $"You don't have enough permission to perform this action ");

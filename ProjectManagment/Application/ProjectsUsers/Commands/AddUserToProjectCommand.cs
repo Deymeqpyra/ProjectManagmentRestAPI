@@ -47,13 +47,13 @@ public class AddUserToProjectCommandHandler(
                                 return await exsitingUser.Match(
                                     async u =>
                                     {
-                                        if (p.UserId != exu.Id || exu.Role!.Name != "Admin")
+                                        if (p.UserId.value == userIdWhoCreated.value || exu.Role!.Name == "Admin")
                                         {
-                                            return await Task.FromResult<Result<ProjectUser, ProjectUserException>>(
-                                                new UserNotEnoughPremission(projectId, userIdWhoCreated));
+                                            return await AddAsync(p.ProjectId, u.Id, cancellationToken);
                                         }
 
-                                        return await AddAsync(p.ProjectId, u.Id, cancellationToken);
+                                        return await Task.FromResult<Result<ProjectUser, ProjectUserException>>(
+                                            new UserNotEnoughPremission(projectId, userIdWhoCreated));
                                     },
                                     () => Task.FromResult<Result<ProjectUser, ProjectUserException>>(
                                         new UserNotFound(projectId, userId)));

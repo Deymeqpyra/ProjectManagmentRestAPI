@@ -53,7 +53,4 @@ public class User
     {
         ProjectTaskId = projectTaskId;
     }
-    // Use only for testing
-    public static User RegisterNewUserWithoutCryption(UserId id, string userName, string password, string email, RoleId roleId)
-        => new(id, userName, password, email, roleId);
 }

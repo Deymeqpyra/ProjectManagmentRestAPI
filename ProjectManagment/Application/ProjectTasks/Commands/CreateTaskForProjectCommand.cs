@@ -18,31 +18,56 @@ public class CreateTaskForProjectCommand : IRequest<Result<ProjectTask, TaskExce
     public required Guid UserId { get; init; }
 }
 
-public class CreateTaskForProjectCommandHandler(ITaskRepository repository, IUserRepository userRepository) :
+public class CreateTaskForProjectCommandHandler(
+    ITaskRepository repository,
+    ICategoryRepository categoryRepository,
+    IProjectRepository projectRepository,
+    IUserRepository userRepository) :
     IRequestHandler<CreateTaskForProjectCommand, Result<ProjectTask, TaskException>>
 {
     public async Task<Result<ProjectTask, TaskException>> Handle(CreateTaskForProjectCommand request,
         CancellationToken cancellationToken)
     {
         bool isFinishedTask = false;
+        var categoryId = new CategoryId(request.CategoryId);
+        var projectId = new ProjectId(request.ProjectId);
+        var userId = new UserId(request.UserId);
+
         var existingTask = await repository.GetByTitle(request.TaskTitle, cancellationToken);
-        var user = await userRepository.GetById(new UserId(request.UserId), cancellationToken);
-        return await user.Match(
-            async u =>
+        var exisitingProject = await projectRepository.GetById(projectId, cancellationToken);
+        var existingCategory = await categoryRepository.GetById(categoryId, cancellationToken);
+        var user = await userRepository.GetById(userId, cancellationToken);
+        return await existingCategory.Match(
+            async category =>
             {
-                return await existingTask.Match(
-                    t => Task.FromResult<Result<ProjectTask, TaskException>>(new TaskAlreadyExistsException(t.TaskId)),
-                    async () => await CreateEntity(
-                        request.TaskTitle,
-                        request.ShortDescription,
-                        isFinishedTask,
-                        u,
-                        new ProjectId(request.ProjectId),
-                        new CategoryId(request.CategoryId),
-                        cancellationToken));
+                return await exisitingProject.Match(
+                    async project =>
+                    {
+                        return await user.Match(
+                            async user =>
+                            {
+                                return await existingTask.Match(
+                                    t => Task.FromResult<Result<ProjectTask, TaskException>>(
+                                        new TaskAlreadyExistsException(t.TaskId)),
+                                    async () => await CreateEntity(
+                                        request.TaskTitle,
+                                        request.ShortDescription,
+                                        isFinishedTask,
+                                        user,
+                                        project,
+                                        category,
+                                        cancellationToken));
+                            },
+                            () => Task.FromResult<Result<ProjectTask, TaskException>>(
+                                new UserNotFoundWhileCreated(ProjectTaskId.Empty())));
+                    },
+                    () => Task.FromResult<Result<ProjectTask, TaskException>>(
+                        new UserNotFoundWhileCreated(ProjectTaskId.Empty())));
             },
-            () => Task.FromResult<Result<ProjectTask, TaskException>>(
-                new UserNotFoundWhileCreated(ProjectTaskId.Empty())));
+            () => Task.FromResult<Result<ProjectTask, TaskException>>(new CategoryNotFound(
+                ProjectTaskId.Empty(),
+                categoryId))
+        );
     }
 
     private async Task<Result<ProjectTask, TaskException>> CreateEntity(
@@ -50,15 +75,22 @@ public class CreateTaskForProjectCommandHandler(ITaskRepository repository, IUse
         string shortDescription,
         bool isFinished,
         User user,
-        ProjectId projectId,
-        CategoryId categoryId,
+        Project project,
+        Category category,
         CancellationToken cancellationToken)
     {
         try
         {
-            var entity = ProjectTask.New(ProjectTaskId.New(),taskTitle, shortDescription, isFinished, user.Id, projectId, categoryId);
+            if (project.UserId == user.Id || user.Role!.Name == "Admin")
+            {
+                var entity = ProjectTask.New(ProjectTaskId.New(), taskTitle, shortDescription, isFinished, user.Id,
+                    project.ProjectId, category.Id);
 
-            return await repository.Create(entity, cancellationToken);
+                return await repository.Create(entity, cancellationToken);
+            }
+
+            return await Task.FromResult<Result<ProjectTask, TaskException>>(
+                new UserNotEnoughPremission(ProjectTaskId.Empty()));
         }
         catch (Exception e)
         {

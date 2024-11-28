@@ -38,16 +38,16 @@ public class DeleteTagFromProjectCommandHandler(
                 return await exstingProject.Match(
                     async p =>
                     {
-                        if (p.UserId != userId || u.Role!.Name != "Admin")
+                        if (p.UserId == userId || u.Role!.Name == "Admin")
                         {
-                            return await Task.FromResult<Result<TagsProject, TagProjectException>>(
-                                new UserNotEnoughPremission(projectId, userId));
+                            return await existingTagProject.Match(
+                                async tg => await DeleteEntity(tg, cancellationToken),
+                                () => Task.FromResult<Result<TagsProject, TagProjectException>>(
+                                    new TagProjectNotFoundException(projectId, tagId)));
                         }
-
-                        return await existingTagProject.Match(
-                            async tg => await DeleteEntity(tg, cancellationToken),
-                            () => Task.FromResult<Result<TagsProject, TagProjectException>>(
-                                new TagProjectNotFoundException(projectId, tagId)));
+                        return await Task.FromResult<Result<TagsProject, TagProjectException>>(
+                            new UserNotEnoughPremission(projectId, userId));
+                       
                     },
                     () => Task.FromResult<Result<TagsProject, TagProjectException>>(
                         new ProjectNotFoundException(projectId))

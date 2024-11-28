@@ -9,5 +9,5 @@ public static class RoleData
     public static Role UserRole()
         => Role.New(RoleId.New(), "User");
     public static Role ExtraRole()
-        => Role.New(RoleId.New(), "ExtraRole");
+        => Role.New(RoleId.New(), "User");
 }

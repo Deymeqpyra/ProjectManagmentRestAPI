@@ -11,5 +11,7 @@ public static class UserData
     public static User AdminUser(RoleId roleId)
         => User.RegisterNewUser(UserId.New(), "admin", passwordAdmin, "admin@admin.com", roleId);
     public static User ExtraUser(RoleId roleId)
-        => User.RegisterNewUserWithoutCryption(UserId.New(), "user", passwordUser, "user@user.com", roleId);
+        => User.RegisterNewUser(UserId.New(), "user", passwordUser, "user@user.com", roleId);
+    public static User MegaExtra(RoleId roleId)
+        => User.RegisterNewUser(UserId.New(), "extraUser", passwordUser, "extraUser@user.com", roleId);
 }

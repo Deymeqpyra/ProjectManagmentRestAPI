@@ -8,14 +8,26 @@ namespace Test.Data;
 public class ProjectData
 {
     public static Project MainProject(
-        UserId userId, 
+        UserId userId,
         ProjectStatusId projectStatusId,
         ProjectPriorityId projectPriorityId)
         => Project.New(
-            ProjectId.New(), 
-            "Test Project", 
-            "Test Project Description", 
-            userId, 
+            ProjectId.New(),
+            "Test Project",
+            "Test Project Description",
+            userId,
+            projectStatusId,
+            projectPriorityId);
+
+    public static Project ExtraProject(
+        UserId userId,
+        ProjectStatusId projectStatusId,
+        ProjectPriorityId projectPriorityId)
+        => Project.New(
+            ProjectId.New(),
+            "Test Project",
+            "Test Project Description",
+            userId,
             projectStatusId,
             projectPriorityId);
 }
