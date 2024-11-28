@@ -118,6 +118,26 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             p => CommentDto.FromDomain(p),
             e => e.ToObjectResult());
     }
+    [Authorize(Roles = "Admin, User")]
+    [HttpDelete("deleteComment/{commentId:guid}")]
+    public async Task<ActionResult<CommentDto>> DeleteComment(
+        [FromRoute] Guid commentId,
+        CancellationToken cancellationToken)
+    {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(userIdClaim);
+        var input = new DeleteCommentCommand()
+        {
+            CommentId = commentId,
+            UserId = userId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+
+        return result.Match<ActionResult<CommentDto>>(
+            p => CommentDto.FromDomain(p),
+            e => e.ToObjectResult());
+    }
 
     [Authorize(Roles = "Admin, User")]
     [HttpPut("addUser/{userId:guid}/toProject/{projectId:guid}")]
@@ -166,7 +186,7 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
     }
 
     [Authorize(Roles = "Admin, User")]
-    [HttpDelete("Delete/{tagId:guid}/inProject/{projectId:guid}")]
+    [HttpDelete("DeleteTag/{tagId:guid}/inProject/{projectId:guid}")]
     public async Task<ActionResult<TagProjectDto>> DeleteTag([FromRoute] Guid tagId, [FromRoute] Guid projectId,
         CancellationToken cancellationToken)
     {

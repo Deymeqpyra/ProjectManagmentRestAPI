@@ -58,6 +58,8 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
     public async Task<Option<Project>> GetById(ProjectId id, CancellationToken cancellationToken)
     {
         var entity = await context.Projects
+            .Include(x=>x.ProjectUsers)
+            .ThenInclude(x=>x.User)
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.ProjectId == id, cancellationToken);
 

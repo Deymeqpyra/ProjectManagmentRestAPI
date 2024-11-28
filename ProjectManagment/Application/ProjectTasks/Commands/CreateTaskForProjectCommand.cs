@@ -81,7 +81,7 @@ public class CreateTaskForProjectCommandHandler(
     {
         try
         {
-            if (project.UserId == user.Id || user.Role!.Name == "Admin")
+            if (project.UserId == user.Id || user.Role!.Name == "Admin" || project.ProjectUsers.Where(x=>x.User.Id == user.Id).Any())
             {
                 var entity = ProjectTask.New(ProjectTaskId.New(), taskTitle, shortDescription, isFinished, user.Id,
                     project.ProjectId, category.Id);

@@ -16,6 +16,7 @@ public static class CommentErrorHandler
                 CommentUnknownException => StatusCodes.Status500InternalServerError,
                 ProjectNotFound => StatusCodes.Status404NotFound,
                 UserNotFound => StatusCodes.Status404NotFound,
+                UserNotEnoughPremission => StatusCodes.Status403Forbidden,
                 _ => StatusCodes.Status500InternalServerError
             }
         };

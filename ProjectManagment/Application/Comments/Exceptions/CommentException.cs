@@ -21,4 +21,6 @@ public class ProjectNotFound(ProjectId projectId, CommentId commentId)
     : CommentException(commentId, $"Project with id {projectId} not found, while creating a new comment {commentId}");
 
 public class UserNotFound(UserId userId, CommentId commentId)
-    : CommentException(commentId, $"User with id {userId} not found, while creating a new comment {commentId}");
+    : CommentException(commentId, $"User with id {userId} not found, while creating a new comment {commentId}"); 
+public class UserNotEnoughPremission(UserId userId, CommentId commentId)
+: CommentException (commentId, $"User not have enough premissions for this comment {commentId}"); 
