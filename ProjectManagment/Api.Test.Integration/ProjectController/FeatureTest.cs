@@ -101,6 +101,83 @@ public class FeatureTest : BaseIntegrationTest, IAsyncLifetime
         response.IsSuccessStatusCode.Should().BeFalse();
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
+    [Fact]
+    public async void ShouldFailToAddUserToNonExistentProject()
+    {
+        // arrange
+        var authToken = await GenerateAuthTokenAsync(_megaExtraUser.Email, UserData.passwordUser);
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+        var nonExistentProjectId = ProjectId.New();
+
+        // act
+        var response = await Client.PutAsync($"projects/addUser/{_extraUser.Id.value}/toProject/{nonExistentProjectId.value}", null);
+
+        // assert
+        response.IsSuccessStatusCode.Should().BeFalse();
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+        var userInProject = await Context.ProjectUsers
+            .FirstOrDefaultAsync(x => x.ProjectId == nonExistentProjectId && x.UserId == _extraUser.Id);
+
+        userInProject.Should().BeNull();
+    }
+
+    [Fact]
+    public async void ShouldFailToAddUserToProjectWithoutAuthorization()
+    {
+        // arrange
+        const string unauthorizedToken = "InvalidToken";
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", unauthorizedToken);
+
+        // act
+        var response = await Client.PutAsync($"projects/addUser/{_extraUser.Id}/toProject/{_extraProject.ProjectId}", null);
+
+        // assert
+        response.IsSuccessStatusCode.Should().BeFalse("The API should return a failure status code when the token is invalid.");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized, "Expected 401 Unauthorized for invalid tokens.");
+    }
+    
+    [Fact]
+    public async void ShouldFailToAddTaskToNonExistentProject()
+    {
+        // arrange
+        var authToken = await GenerateAuthTokenAsync(_megaExtraUser.Email, UserData.passwordUser);
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+        var nonExistentProjectId = ProjectId.New();
+        var request = new CreateTaskDto(
+            title: "Test title for non-existent project",
+            description: "Test description for non-existent project",
+            categoryId: _mainCategory.Id.Value);
+
+        // act
+        var response = await Client.PostAsJsonAsync($"tasks/CreateTask/{nonExistentProjectId}", request);
+
+        // assert
+        response.IsSuccessStatusCode.Should().BeFalse("The API should return a failure status code when trying to add a task to a non-existent project.");
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound, "Expected 404 Not Found for a non-existent project.");
+    }
+
+    [Fact]
+    public async void ShouldFailToAddTaskWithInvalidData()
+    {
+        // arrange
+        var authToken = await GenerateAuthTokenAsync(_megaExtraUser.Email, UserData.passwordUser);
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+        var invalidRequest = new CreateTaskDto(
+            title: "", 
+            description: "This description is valid",
+            categoryId: _mainCategory.Id.Value);
+
+        // act
+        var response = await Client.PostAsJsonAsync($"tasks/CreateTask/{_extraProject.ProjectId.value}", invalidRequest);
+
+        // assert
+        response.IsSuccessStatusCode.Should().BeFalse();
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
 
     [Fact]
     public async void ShouldAddUserToProject()
