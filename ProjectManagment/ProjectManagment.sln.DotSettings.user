@@ -14,7 +14,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ASelect_002Ecs_002Fl_003AC_0021_003FUsers_003Fdeyme_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F20885d5d627d4da82a4a22d7c55abb3d50afdd1ab121738514d59792dc9993_003FSelect_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATask_002Ecs_002Fl_003AC_0021_003FUsers_003Fdeyme_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F2e49d132ea68ff47071c64476ae29138fa965dc555ef7c3f4991586431de241_003FTask_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AWebApplicationBuilder_002Ecs_002Fl_003AC_0021_003FUsers_003Fdeyme_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F9e6ecf3790a24c43487ae724bf9ea8185bdedaf6c28da376d6ea862e66453_003FWebApplicationBuilder_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d451faef_002D2310_002D49e8_002Db481_002D9ef619364ca5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateCategory_Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d451faef_002D2310_002D49e8_002Db481_002D9ef619364ca5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateCategory_Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.CategoryController.UpdateTest.Category_Update_Test&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.CategoryController.UpdateTest.ShouldFailToUpdateCategory_WhenUnauthorized&lt;/TestId&gt;&#xD;
@@ -24,9 +24,14 @@
     &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.CategoryController.UpdateTest.ShouldCreateTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.CategoryController.DeleteTest.ShouldDeleteCategory&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.CategoryController.DeleteTest.ShouldFailToDeleteCategory_WhenUnauthorized&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.UserController.CreateTest.ShouldCreateUser_Success&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.UserController.CreateTest.ShouldFailToCreateUser_WithDuplicateEmail&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.UserController.UpdateTest.ShouldUpdateUserEmail_Success&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.UserController.UpdateTest.ShouldFailToUpdateUserEmail_WhenUnauthorized&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::86A181F3-79B2-4734-84B5-BC1E9ECE9626::net8.0::Api.Test.Integration.UserController.DeleteTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e7d3ecf9_002Ddaf1_002D4ea8_002Dbe22_002Dcfc68b28d900/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldFailToDeleteCategory_WhenUnauthorized" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e7d3ecf9_002Ddaf1_002D4ea8_002Dbe22_002Dcfc68b28d900/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldFailToDeleteCategory_WhenUnauthorized" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="E:\Projects\ProjectManagmentRestAPI\ProjectManagment\Api.Test.Integration" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;Api.Test.Integration&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Monitoring/StartMode/@EntryValue">Disabled</s:String></wpf:ResourceDictionary>

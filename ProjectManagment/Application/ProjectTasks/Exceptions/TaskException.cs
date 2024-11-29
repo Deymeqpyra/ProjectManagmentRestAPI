@@ -1,4 +1,5 @@
 using Domain.Categories;
+using Domain.Projects;
 using Domain.Tasks;
 
 namespace Application.ProjectTasks.Exceptions;
@@ -21,6 +22,8 @@ public class TaskAlreadyFinished(ProjectTaskId taskId)
 public class TaskUnknowException(ProjectTaskId taskId, Exception innerException)
     : TaskException(taskId, $"Unknown exception for task with id: {taskId} ", innerException);
 
+public class ProjectAlreadyFinished(ProjectTaskId taskId, ProjectId projectId)
+    : TaskException(taskId, $"Project with if {projectId} already finished");   
 public class UserNotFoundWhileCreated(ProjectTaskId taskId)
     : TaskException(taskId, $"User not found");
 public class UserNotEnoughPremission(ProjectTaskId taskId)

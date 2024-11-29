@@ -68,7 +68,7 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
         (token => token,
             e => e.ToObjectResult());
     }
-
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("updateUserName/{userId:guid}")]
     public async Task<ActionResult<UserDetailInfoDto>> UpdateName([FromRoute] Guid userId, [FromBody] string name,
         CancellationToken cancellationToken)
@@ -85,7 +85,7 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
             u => UserDetailInfoDto.FromUser(u),
             e => e.ToObjectResult());
     }
-
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("updatePassword/{userId:guid}")]
     public async Task<ActionResult<UserDetailInfoDto>> UpdatePassword(
         [FromRoute] Guid userId,
@@ -104,7 +104,7 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
             u => UserDetailInfoDto.FromUser(u),
             e => e.ToObjectResult());
     }
-
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("updateEmail/{userId:guid}")]
     public async Task<ActionResult<UserDetailInfoDto>> UpdateEmail(
         [FromRoute] Guid userId,
@@ -123,7 +123,8 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
             u => UserDetailInfoDto.FromUser(u),
             e => e.ToObjectResult());
     }
-
+    
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("assignUser/{userId:guid}/toTask/{taskId:guid}")]
     public async Task<ActionResult<UserDetailInfoDto>> AssignTask([FromRoute] Guid userId, [FromRoute] Guid taskId,
         CancellationToken cancellationToken)

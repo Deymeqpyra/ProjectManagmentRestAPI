@@ -60,6 +60,7 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
         var entity = await context.Projects
             .Include(x=>x.ProjectUsers)
             .ThenInclude(x=>x.User)
+            .Include(x=>x.ProjectStatus)
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.ProjectId == id, cancellationToken);
 

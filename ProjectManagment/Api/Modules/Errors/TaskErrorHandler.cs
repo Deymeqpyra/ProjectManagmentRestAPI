@@ -17,6 +17,7 @@ public static class TaskErrorHandler
                 TaskUnknowException => StatusCodes.Status500InternalServerError,
                 UserNotFoundWhileCreated => StatusCodes.Status404NotFound,
                 NotEnoughPermission => StatusCodes.Status403Forbidden,
+                ProjectAlreadyFinished => StatusCodes.Status422UnprocessableEntity,
                 _ => StatusCodes.Status500InternalServerError
             }
         };

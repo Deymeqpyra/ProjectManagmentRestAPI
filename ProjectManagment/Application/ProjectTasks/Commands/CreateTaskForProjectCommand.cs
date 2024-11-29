@@ -1,11 +1,13 @@
 using Application.Common;
 using Application.Common.Interfaces.Repositories;
+using Application.Projects.Exceptions;
 using Application.ProjectTasks.Exceptions;
 using Domain.Categories;
 using Domain.Projects;
 using Domain.Tasks;
 using Domain.Users;
 using MediatR;
+using UserNotFoundWhileCreated = Application.ProjectTasks.Exceptions.UserNotFoundWhileCreated;
 
 namespace Application.ProjectTasks.Commands;
 
@@ -43,6 +45,10 @@ public class CreateTaskForProjectCommandHandler(
                 return await exisitingProject.Match(
                     async project =>
                     {
+                        if (project.ProjectStatus!.Name == "Finished")
+                        {
+                            return await Task.FromResult<Result<ProjectTask, TaskException>>(new ProjectAlreadyFinished(ProjectTaskId.Empty(), projectId));
+                        }
                         return await user.Match(
                             async user =>
                             {
