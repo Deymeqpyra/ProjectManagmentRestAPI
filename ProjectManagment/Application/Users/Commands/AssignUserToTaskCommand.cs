@@ -10,14 +10,19 @@ namespace Application.Users.Commands;
 public class AssignUserToTaskCommand : IRequest<Result<User, UserException>>
 {
     public required Guid UserId { get; init; }
+    public required Guid UserWhoCreated { get; init; }
     public required Guid TaskId { get; init; }
 }
-public class AssignUserToTaskCommandHandler(IUserRepository repository, ITaskRepository taskRepository) : IRequestHandler<AssignUserToTaskCommand, Result<User, UserException>>
+
+public class AssignUserToTaskCommandHandler(IUserRepository repository, ITaskRepository taskRepository)
+    : IRequestHandler<AssignUserToTaskCommand, Result<User, UserException>>
 {
-    public async Task<Result<User, UserException>> Handle(AssignUserToTaskCommand request, CancellationToken cancellationToken)
+    public async Task<Result<User, UserException>> Handle(AssignUserToTaskCommand request,
+        CancellationToken cancellationToken)
     {
         var userId = new UserId(request.UserId);
         var taskId = new ProjectTaskId(request.TaskId);
+        var userWhoCreated = new UserId(request.UserWhoCreated);
         var exisitingUser = await repository.GetById(userId, cancellationToken);
         var exisitingTask = await taskRepository.GetById(taskId, cancellationToken);
 
@@ -25,7 +30,16 @@ public class AssignUserToTaskCommandHandler(IUserRepository repository, ITaskRep
             async u =>
             {
                 return await exisitingTask.Match(
-                    async t => await Assign(u, t.TaskId, cancellationToken),
+                    async t =>
+                    {
+                        if (t.UserId == userWhoCreated)
+                        {
+                            return await Assign(u, t.TaskId, cancellationToken);
+                        }
+
+                        return await Task.FromResult<Result<User, UserException>>(
+                            new UserNotEnouhgPremission(userWhoCreated, t.TaskId));
+                    },
                     () => Task.FromResult<Result<User, UserException>>(new TaskNotFound(userId, taskId)));
             },
             () => Task.FromResult<Result<User, UserException>>(new UserNotFoundException(userId)));
@@ -37,7 +51,7 @@ public class AssignUserToTaskCommandHandler(IUserRepository repository, ITaskRep
         try
         {
             user.AssignProjectTask(taskId);
-            
+
             return await repository.Update(user, cancellationToken);
         }
         catch (Exception e)

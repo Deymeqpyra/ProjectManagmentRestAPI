@@ -18,6 +18,7 @@ public static class UserErrorHandler
                 UserUnknownException => StatusCodes.Status500InternalServerError,
                 RoleNotFound => StatusCodes.Status404NotFound,
                 TaskNotFound => StatusCodes.Status404NotFound,
+                UserNotEnouhgPremission => StatusCodes.Status403Forbidden,
                 WrongCrenditals => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
             }

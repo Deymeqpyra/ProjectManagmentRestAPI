@@ -24,6 +24,8 @@ public class RoleNotFound(UserId userId, RoleId roleId)
 
 public class UserAlreadyAssinedToTask(UserId userId, ProjectTaskId taskId)
     : UserException(userId, $"User {userId} already assigned to task {taskId}");
+public class UserNotEnouhgPremission(UserId userId, ProjectTaskId taskId)
+    : UserException(userId, $"User {userId} not enough premissions for task {taskId}");
 
 public class TaskNotFound(UserId userId, ProjectTaskId taskId)
     : UserException(userId, $"Task {taskId} not found, while trying to assign to user {userId}");

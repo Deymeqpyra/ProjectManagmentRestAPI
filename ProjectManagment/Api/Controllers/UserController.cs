@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Api.Dtos.UsersDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
@@ -129,10 +130,13 @@ public class UserController(ISender sender, IUserQueries userQueries) : Controll
     public async Task<ActionResult<UserDetailInfoDto>> AssignTask([FromRoute] Guid userId, [FromRoute] Guid taskId,
         CancellationToken cancellationToken)
     {
+        string userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userWhoCreatedId = Guid.Parse(userIdClaim);
         var input = new AssignUserToTaskCommand
         {
             UserId = userId,
-            TaskId = taskId
+            TaskId = taskId,
+            UserWhoCreated = userWhoCreatedId
         };
 
         var result = await sender.Send(input, cancellationToken);
