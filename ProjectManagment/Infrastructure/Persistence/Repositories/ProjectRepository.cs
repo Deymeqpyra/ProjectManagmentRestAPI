@@ -39,6 +39,7 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
             .Include(x => x.Comments)
             .ThenInclude(x => x.User)
             .AsNoTracking()
+            .AsSplitQuery()// Split queries
             .ToListAsync(cancellationToken);
     }
 

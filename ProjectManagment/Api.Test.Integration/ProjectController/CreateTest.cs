@@ -48,7 +48,6 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
         var request = new CreateProjectDto(
             Title: "New Project",
             Description: "Description for the new project",
-            statusId: _mainStatus.Id.value,
             priorityId: _mainPriority.Id.value  
         );
 
@@ -75,7 +74,6 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
         var request = new CreateProjectDto(
             Title: "Unauthorized Project",
             Description: "Unauthorized project description",
-            statusId: _mainStatus.Id.value,
             priorityId: _mainPriority.Id.value
         );
 
@@ -97,7 +95,6 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
         var request = new CreateProjectDto(
             Title: "", 
             Description: "Description for the project without title",
-            statusId: _mainStatus.Id.value,
             priorityId: _mainPriority.Id.value
         );
 
@@ -120,7 +117,6 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
         var request = new CreateProjectDto(
             Title: "Project with Invalid Status",
             Description: "Description with invalid status",
-            statusId: invalidStatusId.value,
             priorityId: _mainPriority.Id.value
         );
 
@@ -143,7 +139,6 @@ public class CreateTest : BaseIntegrationTest, IAsyncLifetime
         var request = new CreateProjectDto(
             Title: "Project with Invalid Priority",
             Description: "Description with invalid priority",
-            statusId: _mainStatus.Id.value,
             priorityId: invalidPriorityId.value
         );
 

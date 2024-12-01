@@ -14,7 +14,6 @@ public class CreateProjectCommand : IRequest<Result<Project, ProjectException>>
 {
     public required string Title { get; init; }
     public required string Description { get; init; }
-    public required Guid StatusId { get; init; }
     public required Guid PriorityId { get; init; }
     public required Guid UserId { get; init; }
 }
@@ -31,7 +30,8 @@ public class CreateProjectCommandHandler(
     {
         var exsitingProject = await repository.GetByTitle(request.Title, cancellationToken);
         var exsitingUser = await userRepository.GetById(new UserId(request.UserId), cancellationToken);
-        var exsitingStatus = await statusRepository.GetById(new ProjectStatusId(request.StatusId), cancellationToken);
+        const string startedName = "Started";
+        var exsitingStatus = await statusRepository.GetByName(startedName, cancellationToken);
         var exsitingPriority =
             await priorityRepository.GetById(new ProjectPriorityId(request.PriorityId), cancellationToken);
 
@@ -63,7 +63,7 @@ public class CreateProjectCommandHandler(
                         new PriorityNotFound(ProjectId.Empty(), new ProjectPriorityId(request.PriorityId))));
             },
             () => Task.FromResult<Result<Project, ProjectException>>(new StatusNotFound(ProjectId.Empty(),
-                new ProjectStatusId(request.StatusId))));
+                ProjectStatusId.New())));
     }
 
     private async Task<Result<Project, ProjectException>> CreateEntity

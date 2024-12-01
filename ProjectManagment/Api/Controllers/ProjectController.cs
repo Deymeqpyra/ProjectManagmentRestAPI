@@ -64,7 +64,6 @@ public class ProjectController(ISender sender, IProjectQueries projectQueries) :
             Title = dto.Title,
             Description = dto.Description,
             PriorityId = dto.priorityId,
-            StatusId = dto.statusId,
             UserId = userId
         };
 

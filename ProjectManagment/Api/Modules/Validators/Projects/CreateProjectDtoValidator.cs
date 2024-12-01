@@ -17,7 +17,5 @@ public class CreateProjectDtoValidator : AbstractValidator<CreateProjectDto>
             .MaximumLength(255).WithMessage("Description is too long.(max: 255)");
         RuleFor(x => x.priorityId)
             .NotEmpty().WithMessage("PriorityId is required.");
-        RuleFor(x=>x.statusId)
-            .NotEmpty().WithMessage("StatusId is required.");
     }
 }
