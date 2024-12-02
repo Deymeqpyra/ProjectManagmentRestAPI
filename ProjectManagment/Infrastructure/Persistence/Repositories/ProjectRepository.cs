@@ -62,7 +62,9 @@ public class ProjectRepository(ApplicationDbContext context) : IProjectRepositor
             .Include(x=>x.ProjectUsers)
             .ThenInclude(x=>x.User)
             .Include(x=>x.ProjectStatus)
+            .Include(x=>x.ProjectPriority)
             .AsNoTracking()
+            .AsSplitQuery()
             .FirstOrDefaultAsync(x => x.ProjectId == id, cancellationToken);
 
         return entity == null ? Option.None<Project>() : Option.Some(entity);

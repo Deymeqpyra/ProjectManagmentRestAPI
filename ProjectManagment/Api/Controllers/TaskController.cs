@@ -3,6 +3,7 @@ using Api.Dtos.TasksDto;
 using Api.Modules.Errors;
 using Application.Common.Interfaces.Queries;
 using Application.ProjectTasks.Commands;
+using Domain.Projects;
 using Domain.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,15 @@ public class TaskController(ISender sender, ITaskQueries taskQueries) : Controll
     public async Task<ActionResult<IReadOnlyList<ProjectTaskDto>>> GetAll(CancellationToken cancellationToken)
     {
         var entiteis = await taskQueries.GetAll(cancellationToken);
+
+        return entiteis.Select(ProjectTaskDto.FromProjectTask).ToList();
+    }
+    
+    [Authorize(Roles = "Admin, User")]
+    [HttpGet("GetByProjectId/{projectId:guid}")]
+    public async Task<ActionResult<IReadOnlyList<ProjectTaskDto>>> GetByProjectId([FromRoute] Guid projectId,CancellationToken cancellationToken)
+    {
+        var entiteis = await taskQueries.GetByProjectId(new ProjectId(projectId),cancellationToken);
 
         return entiteis.Select(ProjectTaskDto.FromProjectTask).ToList();
     }

@@ -1,5 +1,6 @@
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
+using Domain.Projects;
 using Domain.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Optional;
@@ -31,7 +32,16 @@ public class TaskRepository(ApplicationDbContext context) : ITaskRepository, ITa
 
         return entity == null ? Option.None<ProjectTask>() : Option.Some(entity);
     }
-
+    public async Task<IReadOnlyList<ProjectTask>> GetByProjectId(ProjectId projectId, CancellationToken cancellationToken)
+    {
+        return await context.ProjectTasks
+            .Include(x=>x.Category)
+            .Include(x=>x.User)
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Where(x => x.ProjectId == projectId)
+            .ToListAsync(cancellationToken);
+    }
     public async Task<ProjectTask> Create(ProjectTask projectTask, CancellationToken cancellationToken)
     {
         await context.ProjectTasks.AddAsync(projectTask, cancellationToken);
